@@ -1,6 +1,8 @@
-# universitybank
+# University Bank
 
-This template should help get you started developing with Vue 3 in Vite.
+![University Bank logo](./public/logo-no-background.png)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1bf17f15-70a6-4f6f-91d4-3dc363c56ed8/deploy-status)](https://app.netlify.com/sites/universitybank/deploys)
 
 ## Recommended IDE Setup
 
