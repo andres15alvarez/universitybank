@@ -1,6 +1,6 @@
 <template>
   <v-toolbar height="55">
-    <img src="../../logo-no-background.png" class="logo" />
+    <img src="../../public/logo-no-background.png" class="logo" />
 
     <div class="Montserrat-Bold div-nav">
       <p>Servicios</p>
