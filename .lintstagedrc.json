@@ -1,6 +1,6 @@
 {
     "src/**/*.{js,jsx,json,ts,tsx,vue}": [
-        "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-        "prettier --write src/"
+        "npm run format",
+        "npm run lint"
     ]
 }
