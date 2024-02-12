@@ -12,7 +12,7 @@
         
         </div>
         <div class="b">
-          <img src="../../public/ImagenHome.png" class="imagenHome">
+          <img src="../../ImagenHome.png" class="imagenHome">
         </div>
     </div>
 </template>
