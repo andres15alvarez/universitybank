@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HomeNav from './components/HomeNav.vue'
+import Toolbar from './components/Toolbar.vue'
 </script>
 
 <template>
-   <HomeNav/>
+   <Toolbar/>
 </template>

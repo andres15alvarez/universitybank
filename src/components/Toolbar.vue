@@ -1,7 +1,7 @@
 <template>
       <v-toolbar height="55">
 
-        <img src="./logo-no-background.png" class="logo"/>
+        <img src="../../logo-no-background.png" class="logo"/>
 
         <div class="Montserrat-Bold div-nav" >
             <p>Servicios</p>
@@ -30,7 +30,7 @@
         
         </div>
         <div class="b">
-          <img src="./ImagenHome.png" class="imagenHome">
+          <img src="../../public/ImagenHome.png" class="imagenHome">
         </div>
     </div>
 
