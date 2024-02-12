@@ -1,35 +1,30 @@
-@import './base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@font-face {
+    font-family: MontserratAlternates-Regular;
+    src: url(./fonts/MontserratAlternates-Regular.ttf);
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+@font-face {
+    font-family: MontserratAlternates-SemiBold;
+    src: url(./fonts/MontserratAlternates-SemiBold.ttf);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+@font-face {
+    font-family: MontserratAlternates-Bold;
+    src: url(./fonts/MontserratAlternates-Bold.ttf);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.Montserrat-Bold{
+    font-family: MontserratAlternates-Bold;
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
 }
+
+.Montserrat-Regular{
+    font-family: MontserratAlternates-Regular;
+
+}
+
+.Montserrat-SemiBold{
+    font-family: MontserratAlternates-SemiBold;
+
+}
+
