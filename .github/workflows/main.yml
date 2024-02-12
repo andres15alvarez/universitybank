@@ -34,10 +34,10 @@ jobs:
       run: npm install
 
     - name: Formatting
-      run: npm run format
+      run: npx prettier --check src/
 
     - name: Linting
-      run: npm run lint
+      run: npx eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore
 
     - name: Testing
       run: npm run test

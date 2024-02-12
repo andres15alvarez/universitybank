@@ -1,0 +1,6 @@
+{
+    "src/**/*.{js,jsx,json,ts,tsx,vue}": [
+        "npm run format",
+        "npm run lint"
+    ]
+}
