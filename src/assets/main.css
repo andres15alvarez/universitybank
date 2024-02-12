@@ -1,30 +1,26 @@
 @font-face {
-    font-family: MontserratAlternates-Regular;
-    src: url(./fonts/MontserratAlternates-Regular.ttf);
+  font-family: MontserratAlternates-Regular;
+  src: url(./fonts/MontserratAlternates-Regular.ttf);
 }
 
 @font-face {
-    font-family: MontserratAlternates-SemiBold;
-    src: url(./fonts/MontserratAlternates-SemiBold.ttf);
+  font-family: MontserratAlternates-SemiBold;
+  src: url(./fonts/MontserratAlternates-SemiBold.ttf);
 }
 
 @font-face {
-    font-family: MontserratAlternates-Bold;
-    src: url(./fonts/MontserratAlternates-Bold.ttf);
+  font-family: MontserratAlternates-Bold;
+  src: url(./fonts/MontserratAlternates-Bold.ttf);
 }
 
-.Montserrat-Bold{
-    font-family: MontserratAlternates-Bold;
-
+.Montserrat-Bold {
+  font-family: MontserratAlternates-Bold;
 }
 
-.Montserrat-Regular{
-    font-family: MontserratAlternates-Regular;
-
+.Montserrat-Regular {
+  font-family: MontserratAlternates-Regular;
 }
 
-.Montserrat-SemiBold{
-    font-family: MontserratAlternates-SemiBold;
-
+.Montserrat-SemiBold {
+  font-family: MontserratAlternates-SemiBold;
 }
-
