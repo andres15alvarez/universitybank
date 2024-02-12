@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import Toolbar from './components/Toolbar.vue'
+import NavegationBar from './components/NavegationBar.vue'
+import HomeScreen from './components/HomeScreen.vue';
 </script>
 
 <template>
-   <Toolbar/>
+   <NavegationBar/>
+   <HomeScreen/>
 </template>
