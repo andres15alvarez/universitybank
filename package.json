@@ -13,7 +13,7 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "commit": "lint-staged",
+    "pre-commit": "lint-staged",
     "prepare": "husky || true"
   },
   "dependencies": {
