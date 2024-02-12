@@ -12,8 +12,5 @@ const vuetify = createVuetify({
   components,
   directives
 })
-const name = {
-  name: 'Andres',
-  name: 'Andres'
-}
+
 createApp(App).use(vuetify).mount('#app')
