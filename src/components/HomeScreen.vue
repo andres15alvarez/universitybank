@@ -11,7 +11,6 @@
           class="Montserrat-SemiBold text-none"
           variant="flat"
           color="#085F63"
-          size="small"
           rounded="xs"
         >
           ¡Únete ahora!
