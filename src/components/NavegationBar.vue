@@ -8,76 +8,28 @@
       <p>Contacto</p>
     </div>
 
-    <v-btn
-      class="Montserrat-Bold text-none"
-      variant="flat"
-      color="#085F63"
-      size="small"
-      rounded="xs"
-    >
-      Acceder
-    </v-btn>
+    <v-btn class="Montserrat-Bold text-none" variant="flat" color="#085F63"> Acceder </v-btn>
   </v-toolbar>
 </template>
 
 <style>
-.container {
-  display: flex;
-}
-.a {
-  display: inline-block;
-  width: 55%;
-  height: 365px;
-  padding-left: 120px;
-  padding-top: 110px;
-}
-.b {
-  display: inline-block;
-  width: 45%;
-  height: 365px;
-}
-
-.boton {
-  width: 180px;
-  margin-top: 5px;
-  margin-left: 75px;
-}
-
-h3 {
-  font-size: 20px;
-  color: #085f63;
+.div-nav {
+  margin: auto auto;
 }
 
 .v-toolbar__content {
   background-color: #fff;
 }
 
-.imagenHome {
-  width: 400px;
-  margin-left: -20px;
-  margin-top: -30px;
-}
-
 .logo {
-  width: 20%;
+  width: 23%;
   margin-left: 30px;
 }
 
-p {
-  font-size: 12px;
+.div-nav p {
+  font-size: 18px;
   display: inline;
   color: #085f63;
-  padding: 30px;
-}
-
-.div-nav {
-  width: 62%;
-  justify-content: space-between;
-  padding: 55px;
-}
-
-.a p {
-  color: rgba(0, 0, 0, 0.575);
-  padding-left: 0%;
+  padding: 0 50px;
 }
 </style>
