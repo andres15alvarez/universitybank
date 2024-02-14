@@ -16,9 +16,12 @@
       ></v-text-field>
 
       <v-text-field
+        append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible ? 'text' : 'password'"
         label="Contraseña"
         placeholder="Ingresa tu contraseña"
         variant="outlined"
+        @click:append-inner="visible = !visible"
       ></v-text-field>
 
       <v-btn block class="text-none" variant="flat" color="#085F63">
@@ -82,3 +85,11 @@ a {
   color: rgba(0, 0, 0, 0.8);
 }
 </style>
+
+<script>
+export default {
+  data: () => ({
+    visible: false
+  })
+}
+</script>
