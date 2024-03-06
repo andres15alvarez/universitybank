@@ -1,83 +1,40 @@
 <template>
-  <v-toolbar height="55">
-    <img src="../../public/logo-no-background.png" class="logo" />
+  <v-toolbar>
+    <img
+      class="ml-10 ml-md-3 d-sm-none d-md-flex w-25"
+      src="https://universitybank.sirv.com/images/logo-no-background.png"
+      width="300"
+    />
 
-    <div class="Montserrat-Bold div-nav">
-      <p>Servicios</p>
-      <p>Sobre Nosotros</p>
-      <p>Contacto</p>
-    </div>
+    <v-container>
+      <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="#085F63">
+        <v-btn class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto" text="Servicios"></v-btn>
+        <v-btn
+          class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+          text="Sobre Nosotros"
+        ></v-btn>
+        <v-btn class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto" text="Contacto"></v-btn>
+      </v-btn-group>
+    </v-container>
 
     <v-btn
-      class="Montserrat-Bold text-none"
+      class="navigationBtn mr-10 mr-md-3 text-none"
       variant="flat"
       color="#085F63"
-      size="small"
-      rounded="xs"
-    >
-      Acceder
-    </v-btn>
+      size="default"
+      rounded="4"
+      text="Acceder"
+    ></v-btn>
   </v-toolbar>
 </template>
 
 <style>
-.container {
-  display: flex;
-}
-.a {
-  display: inline-block;
-  width: 55%;
-  height: 365px;
-  padding-left: 120px;
-  padding-top: 110px;
-}
-.b {
-  display: inline-block;
-  width: 45%;
-  height: 365px;
-}
-
-.boton {
-  width: 180px;
-  margin-top: 5px;
-  margin-left: 75px;
-}
-
-h3 {
-  font-size: 20px;
-  color: #085f63;
-}
-
 .v-toolbar__content {
   background-color: #fff;
 }
 
-.imagenHome {
-  width: 400px;
-  margin-left: -20px;
-  margin-top: -30px;
-}
-
-.logo {
-  width: 20%;
-  margin-left: 30px;
-}
-
-p {
-  font-size: 12px;
-  display: inline;
-  color: #085f63;
-  padding: 30px;
-}
-
-.div-nav {
-  width: 62%;
-  justify-content: space-between;
-  padding: 55px;
-}
-
-.a p {
-  color: rgba(0, 0, 0, 0.575);
-  padding-left: 0%;
+.navigationBtn {
+  font-size: 20px !important;
+  font-family: MontserratAlternates-Bold;
 }
 </style>
