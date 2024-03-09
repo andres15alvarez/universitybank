@@ -1,4 +1,9 @@
+<script setup lang="ts">
+import NavigationBar from '@/components/NavigationBar.vue'
+</script>
+
 <template>
+  <NavigationBar />
   <div class="container d-md-inline-flex mt-5 mx-5">
     <div class="information ml-10">
       <h3 class="Montserrat-SemiBold">

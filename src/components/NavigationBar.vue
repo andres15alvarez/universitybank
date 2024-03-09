@@ -13,7 +13,11 @@
           class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
           text="Sobre Nosotros"
         ></v-btn>
-        <v-btn class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto" text="Contacto"></v-btn>
+        <v-btn
+          class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+          text="Contacto"
+          to="/contact"
+        ></v-btn>
       </v-btn-group>
     </v-container>
 

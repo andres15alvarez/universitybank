@@ -1,9 +1,5 @@
-<script setup lang="ts">
-import NavegationBar from './components/NavegationBar.vue'
-import HomeScreen from './components/HomeScreen.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <NavegationBar />
-  <HomeScreen />
+  <router-view></router-view>
 </template>

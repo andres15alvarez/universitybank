@@ -9,6 +9,7 @@ import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi.mjs'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import router from './routers/router'
 
 const vuetify = createVuetify({
   icons: {
@@ -22,4 +23,4 @@ const vuetify = createVuetify({
   directives
 })
 
-createApp(App).use(vuetify).mount('#app')
+createApp(App).use(vuetify).use(router).mount('#app')
