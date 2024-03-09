@@ -1,7 +1,7 @@
 <template>
-  <v-toolbar>
+  <v-toolbar class="d-none d-sm-flex" color="#fff">
     <img
-      class="ml-10 ml-md-3 d-sm-none d-md-flex w-25"
+      class="ml-10 ml-md-3 d-none d-md-flex w-25"
       src="https://universitybank.sirv.com/images/logo-no-background.png"
       width="300"
     />
@@ -26,13 +26,56 @@
       text="Acceder"
     ></v-btn>
   </v-toolbar>
+
+  <v-toolbar class="d-xs-flex d-sm-none" color="#fff">
+    <v-btn color="#085F63" icon="mdi-menu">
+      <v-menu activator="parent">
+        <v-list>
+          <v-list-item>
+            <v-btn
+              variant="text"
+              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              text="Servicios"
+              color="#085F63"
+            ></v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn
+              variant="text"
+              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              text="Sobre Nosotros"
+              color="#085F63"
+            ></v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn
+              variant="text"
+              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              text="Contacto"
+              color="#085F63"
+            ></v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn
+              variant="flat"
+              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              text="Acceder"
+              color="#085F63"
+            ></v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-btn>
+
+    <img
+      class="ml-10 w-50"
+      src="https://universitybank.sirv.com/images/logo-no-background.png"
+      width="75"
+    />
+  </v-toolbar>
 </template>
 
 <style>
-.v-toolbar__content {
-  background-color: #fff;
-}
-
 .navigationBtn {
   font-size: 20px !important;
   font-family: MontserratAlternates-Bold;
