@@ -1,10 +1,12 @@
 <template>
   <v-toolbar class="d-none d-sm-flex" color="#fff">
-    <img
-      class="ml-10 ml-md-3 d-none d-md-flex w-25"
-      src="https://universitybank.sirv.com/images/logo-no-background.png"
-      width="300"
-    />
+    <a href="/">
+      <img
+        class="ml-10 ml-md-3 d-none d-md-flex w-75"
+        src="https://universitybank.sirv.com/images/logo-no-background.png"
+        width="300"
+      />
+    </a>
 
     <v-container>
       <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="#085F63">
@@ -71,11 +73,13 @@
       </v-menu>
     </v-btn>
 
-    <img
-      class="ml-10 w-50"
-      src="https://universitybank.sirv.com/images/logo-no-background.png"
-      width="75"
-    />
+    <a href="/">
+      <img
+        class="ml-10 w-50"
+        src="https://universitybank.sirv.com/images/logo-no-background.png"
+        width="75"
+      />
+    </a>
   </v-toolbar>
 </template>
 
