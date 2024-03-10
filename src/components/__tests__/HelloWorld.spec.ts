@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import Home from '@/views/Home.vue'
+import HomeView from '@/views/HomeView.vue'
 
 describe('HomeScreen', () => {
   it('renders properly', () => {
-    const wrapper = mount(Home)
+    const wrapper = mount(HomeView)
     expect(wrapper.text()).toContain('universitario')
   })
 })
