@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="div__img">
-      <img src="../../public/imgLaptop.webp" class="imgLaptop__login" />
+    <div class="div__img d-none d-sm-flex w-45">
+      <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__login" />
     </div>
 
     <div class="div__form">
@@ -47,12 +47,10 @@
 }
 
 .div__img {
-  width: 55%;
   height: 100vh;
 }
 
 .div__form {
-  width: 45%;
   padding: 8% 3%;
 }
 
