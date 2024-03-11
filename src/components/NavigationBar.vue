@@ -14,6 +14,7 @@
         <v-btn
           class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
           text="Sobre Nosotros"
+          to="/about"
         ></v-btn>
         <v-btn
           class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
@@ -51,6 +52,7 @@
               class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
               text="Sobre Nosotros"
               color="#085F63"
+              to="/about"
             ></v-btn>
           </v-list-item>
           <v-list-item>
@@ -59,6 +61,7 @@
               class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
               text="Contacto"
               color="#085F63"
+              to="/contact"
             ></v-btn>
           </v-list-item>
           <v-list-item>
