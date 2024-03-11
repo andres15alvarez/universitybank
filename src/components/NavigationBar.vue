@@ -31,6 +31,7 @@
       size="default"
       rounded="4"
       text="Acceder"
+      to="/login"
     ></v-btn>
   </v-toolbar>
 
@@ -70,6 +71,7 @@
               class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
               text="Acceder"
               color="#085F63"
+              to="/login"
             ></v-btn>
           </v-list-item>
         </v-list>

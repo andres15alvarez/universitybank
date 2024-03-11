@@ -23,7 +23,11 @@ import NavigationBar from '@/components/NavigationBar.vue'
         </v-btn>
       </div>
     </div>
-    <img src="/ImagenHome.png" class="imagenHome w-50" width="600" />
+    <img
+      src="https://universitybank.sirv.com/images/home.png"
+      class="imagenHome w-50"
+      width="600"
+    />
   </div>
 </template>
 
