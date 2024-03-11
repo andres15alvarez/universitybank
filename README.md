@@ -1,6 +1,6 @@
 # University Bank
 
-![University Bank logo](./public/logo-no-background.png)
+![University Bank logo](https://universitybank.sirv.com/images/logo-no-background.png)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1bf17f15-70a6-4f6f-91d4-3dc363c56ed8/deploy-status)](https://app.netlify.com/sites/universitybank/deploys)
 ![Github Actions Status](https://github.com/andres15alvarez/universitybank/actions/workflows/main.yml/badge.svg)

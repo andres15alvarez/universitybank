@@ -5,7 +5,10 @@
     </div>
 
     <div class="div__form">
-      <img src="../../public/logo-no-background.png" class="imgLogo__form" />
+      <img
+        src="https://universitybank.sirv.com/images/logo-no-background.png"
+        class="imgLogo__form"
+      />
 
       <h1>Bienvenido</h1>
 
@@ -16,9 +19,12 @@
       ></v-text-field>
 
       <v-text-field
+        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible ? 'password' : 'text'"
         label="Contraseña"
         placeholder="Ingresa tu contraseña"
         variant="outlined"
+        @click:append-inner="visible = !visible"
       ></v-text-field>
 
       <v-btn block class="text-none" variant="flat" color="#085F63">
@@ -82,3 +88,11 @@ a {
   color: rgba(0, 0, 0, 0.8);
 }
 </style>
+
+<script>
+export default {
+  data: () => ({
+    visible: true
+  })
+}
+</script>
