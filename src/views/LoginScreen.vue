@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerLogin">
     <div class="div__img d-none d-sm-flex w-45">
       <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__login" />
     </div>
@@ -38,11 +38,11 @@
 </template>
 
 <style>
-* {
+.containerLogin {
   font-family: MontserratAlternates-Regular;
 }
 
-.container {
+.containerLogin {
   display: flex;
 }
 
