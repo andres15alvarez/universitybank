@@ -6,16 +6,14 @@ import NavigationBar from '@/components/NavigationBar.vue'
   <NavigationBar />
   <div class="container d-md-inline-flex mt-5 mx-5">
     <div class="information ml-10">
-      <h3 class="Montserrat-SemiBold">
-        Institución comprometida con los estudiantes universitarios
-      </h3>
-      <p class="Montserrat-SemiBold mt-5">soluciones financieras ágiles y eficientes</p>
+      <h3 class="font-weight-bold">Institución comprometida con los estudiantes universitarios</h3>
+      <p class="font-weight-medium mt-5">soluciones financieras ágiles y eficientes</p>
       <div class="boton">
         <v-btn
           block
-          class="Montserrat-SemiBold ml-15 mt-5 text-none"
+          class="font-weight-bold ml-15 mt-5 text-none"
           variant="flat"
-          color="#085F63"
+          color="primary"
           size="default"
           rounded="4"
         >

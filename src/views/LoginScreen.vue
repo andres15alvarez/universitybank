@@ -10,7 +10,7 @@
         class="imgLogo__form"
       />
 
-      <h1>Bienvenido</h1>
+      <h1 class="font-weigth-bold">Bienvenido</h1>
 
       <v-text-field
         label="Correo electrónico"
@@ -27,23 +27,18 @@
         @click:append-inner="visible = !visible"
       ></v-text-field>
 
-      <v-btn block class="text-none" variant="flat" color="#085F63">
+      <v-btn block class="text-none" variant="flat" color="primary">
         <b>Iniciar sesión</b>
       </v-btn>
-
-      <div class="texto__form--Login">
-        <p class="txt">¿Todavía no tienes una cuenta?</p>
-        <b class="txt"><a href="/#/signup">Crear una cuenta</a></b>
+      <div class="text-center">
+        <p class="text-subtitle-1">¿Todavía no tienes una cuenta?</p>
+        <b><a href="">Crear una cuenta</a></b>
       </div>
     </div>
   </div>
 </template>
 
 <style>
-.containerLogin {
-  font-family: MontserratAlternates-Regular;
-}
-
 .containerLogin {
   display: flex;
 }
@@ -74,7 +69,6 @@ p {
 }
 
 h1 {
-  font-family: MontserratAlternates-Bold;
   padding-bottom: 35px;
 }
 
