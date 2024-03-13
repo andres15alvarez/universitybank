@@ -31,8 +31,10 @@
         <b>Iniciar sesión</b>
       </v-btn>
 
-      <p>¿Todavía no tienes una cuenta?</p>
-      <b><a href="">Crear una cuenta</a></b>
+      <div class="texto__form--Login">
+        <p class="txt">¿Todavía no tienes una cuenta?</p>
+        <b class="txt"><a href="/#/signup">Crear una cuenta</a></b>
+      </div>
     </div>
   </div>
 </template>
@@ -61,16 +63,14 @@
 }
 
 .imgLaptop__login {
-  width: 100%;
+  width: 55vw;
   height: 100%;
-  object-fit: cover;
 }
 
 p {
   display: inline-block;
-  position: relative;
-  padding-top: 20px;
-  color: rgba(0, 0, 0, 0.7);
+  padding-right: 8px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 h1 {
@@ -78,12 +78,18 @@ h1 {
   padding-bottom: 35px;
 }
 
-b {
-  padding-left: 8px;
+.txt {
+  font-size: 16px;
 }
 a {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.8);
+}
+
+.texto__form--Login {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
 </style>
 
