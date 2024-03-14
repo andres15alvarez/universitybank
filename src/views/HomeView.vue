@@ -16,6 +16,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
           color="primary"
           size="default"
           rounded="4"
+          to="/signUp"
         >
           ¡Únete ahora!
         </v-btn>

@@ -1,14 +1,16 @@
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
-      <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__signUp" />
+      <img src="https://universitybank.sirv.com/images/hands.png" class="imgLaptop__signUp" />
     </div>
 
     <div class="div__form--SignUp">
-      <img
-        src="https://universitybank.sirv.com/images/logo-no-background.png"
-        class="imgLogo__form--signUp"
-      />
+      <a href="/">
+        <img
+          src="https://universitybank.sirv.com/images/logo-no-background.png"
+          class="imgLogo__form--signUp"
+        />
+      </a>
 
       <h1>Datos personales</h1>
 
@@ -20,7 +22,7 @@
 
       <v-text-field
         label="Apellidos"
-        placeholder="Ingresa tu apellidos"
+        placeholder="Ingresa tus apellidos"
         variant="outlined"
       ></v-text-field>
 

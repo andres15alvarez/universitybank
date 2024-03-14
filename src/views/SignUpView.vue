@@ -5,10 +5,12 @@
     </div>
 
     <div class="div__form--SignUp">
-      <img
-        src="https://universitybank.sirv.com/images/logo-no-background.png"
-        class="imgLogo__form--signUp"
-      />
+      <a href="">
+        <img
+          src="https://universitybank.sirv.com/images/logo-no-background.png"
+          class="imgLogo__form--signUp"
+        />
+      </a>
 
       <h1>Crear una cuenta</h1>
 
