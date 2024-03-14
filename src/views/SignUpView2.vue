@@ -5,12 +5,12 @@
     </div>
 
     <div class="div__form--SignUp">
-      <a href="/">
+      <RouterLink to="/">
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form--signUp"
         />
-      </a>
+      </RouterLink>
 
       <h1>Datos personales</h1>
 

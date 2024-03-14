@@ -5,12 +5,12 @@
     </div>
 
     <div class="div__form--SignUp">
-      <a href="">
+      <RouterLink to="/">
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form--signUp"
         />
-      </a>
+      </RouterLink>
 
       <h1>Crear una cuenta</h1>
 
@@ -46,7 +46,7 @@
 
       <div class="texto__form">
         <p class="txt">¿Ya tienes una cuenta?</p>
-        <b class="txt"><a href="/#/login">Inicia sesión</a></b>
+        <b class="txt"><RouterLink to="/login">Inicia sesión</RouterLink></b>
       </div>
     </div>
   </div>
@@ -101,6 +101,8 @@
 </style>
 
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   data: () => ({
     visible2: true,

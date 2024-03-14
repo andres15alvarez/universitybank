@@ -6,10 +6,10 @@ import ServiceCom from '@/components/ServiceCom.vue'
 <template>
   <NavigationBar />
   <div class="text-center">
-    <h3>Servicios</h3>
+    <p class="font-weight-bold text-h4 text-md-h3 text-primary">Servicios</p>
   </div>
 
-  <div class="containerServices">
+  <div class="mt-10 mx-5">
     <v-row>
       <v-col>
         <div class="pa-2 ma-2">

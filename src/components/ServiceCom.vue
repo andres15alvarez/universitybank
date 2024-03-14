@@ -20,7 +20,7 @@ export default {
 
       <v-divider class="border-opacity-100" thickness="2" color="#085f63" length="90"></v-divider>
 
-      <p class="parrafoService">
+      <p class="mt-8 parrafoService text-black">
         {{ text }}
       </p>
     </div>
@@ -32,7 +32,6 @@ export default {
   display: inline-block;
   font-size: 25px;
   padding-bottom: 7px;
-
   line-height: 1.25;
 }
 .containerService {

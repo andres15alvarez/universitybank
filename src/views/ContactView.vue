@@ -47,10 +47,3 @@ import ContactCard from '@/components/ContactCard.vue'
     </v-row>
   </v-container>
 </template>
-
-<style>
-.grid {
-  display: flex;
-  justify-content: center;
-}
-</style>
