@@ -10,7 +10,12 @@
 
     <v-container>
       <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="primary">
-        <v-btn class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto" text="Servicios"></v-btn>
+        <v-btn
+          class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
+          text="Servicios"
+          to="/services"
+        >
+        </v-btn>
         <v-btn
           class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
           text="Sobre Nosotros"
@@ -46,6 +51,7 @@
               class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
               text="Servicios"
               color="primary"
+              to="/services"
             ></v-btn>
           </v-list-item>
           <v-list-item>
