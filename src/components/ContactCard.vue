@@ -1,3 +1,11 @@
+<script setup lang="ts">
+const props = defineProps({
+  icon: String,
+  title: String,
+  subtitle: String
+})
+</script>
+
 <template>
   <v-card elevation="16" class="cardDivider text-center pa-6" rounded="10" width="400" height="255">
     <v-icon class="center" :icon="icon" size="x-large" color="primary"></v-icon>
@@ -19,13 +27,3 @@
   border-bottom: 5px solid #085f63;
 }
 </style>
-
-<script>
-export default {
-  props: {
-    icon: String,
-    title: String,
-    subtitle: String
-  }
-}
-</script>
