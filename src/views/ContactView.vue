@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue'
 import ContactCard from '@/components/ContactCard.vue'
+import FooterBar from '@/components/FooterBar.vue'
 </script>
 
 <template>
@@ -46,4 +47,5 @@ import ContactCard from '@/components/ContactCard.vue'
       </v-col>
     </v-row>
   </v-container>
+  <FooterBar />
 </template>

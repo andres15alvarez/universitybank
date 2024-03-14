@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue'
 import ServiceCard from '@/components/ServiceCard.vue'
+import FooterBar from '@/components/FooterBar.vue'
 </script>
 
 <template>
@@ -71,6 +72,7 @@ import ServiceCard from '@/components/ServiceCard.vue'
 
     <img src="https://universitybank.sirv.com/images/wave.png" class="onda d-none d-sm-flex w-45" />
   </div>
+  <FooterBar />
 </template>
 
 <style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue'
+import FooterBar from '@/components/FooterBar.vue'
 </script>
 
 <template>
@@ -58,6 +59,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
       </v-row>
     </v-container>
   </div>
+  <FooterBar />
 </template>
 
 <style>

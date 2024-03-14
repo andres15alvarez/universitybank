@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue'
+import FooterBar from '@/components/FooterBar.vue'
 </script>
 
 <template>
   <NavigationBar />
-  <div class="d-md-inline-flex align-center text-center text-md-start mt-5 mx-5">
+  <div class="d-md-inline-flex align-center text-center text-md-start mx-5">
     <div class="ml-md-10">
       <p class="text-primary font-weight-bold text-h5 text-md-h4">
         Institución comprometida con los estudiantes universitarios
@@ -29,6 +30,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
       width="600"
     />
   </div>
+  <FooterBar />
 </template>
 
 <style>
