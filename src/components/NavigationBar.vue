@@ -10,7 +10,12 @@
 
     <v-container>
       <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="#085F63">
-        <v-btn class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto" text="Servicios"></v-btn>
+        <v-btn
+          class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+          text="Servicios"
+          to="/services"
+        ></v-btn>
+
         <v-btn
           class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
           text="Sobre Nosotros"
@@ -45,6 +50,7 @@
               class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
               text="Servicios"
               color="#085F63"
+              to="/services"
             ></v-btn>
           </v-list-item>
           <v-list-item>
