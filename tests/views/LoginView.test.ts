@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest'
 
 import { shallowMount, config } from '@vue/test-utils'
 import { vuetify } from '../../src/main'
-import LoginScreen from '../../src/views/LoginScreen.vue'
+import LoginView from '../../src/views/LoginView.vue'
 
 config.global.plugins = [vuetify]
 
-describe('LoginScreen', () => {
+describe('LoginView', () => {
   it('renders properly', () => {
-    const wrapper = shallowMount(LoginScreen)
+    const wrapper = shallowMount(LoginView)
     expect(wrapper.text()).toContain(
       'Bienvenido'
     )
