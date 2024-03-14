@@ -6,7 +6,7 @@ import ContactCard from '@/components/ContactCard.vue'
 <template>
   <NavigationBar />
   <div class="text-center">
-    <h3>Contáctanos</h3>
+    <p class="font-weight-bold text-h4 text-md-h3 text-primary">Contáctanos</p>
   </div>
   <v-container>
     <v-row>
