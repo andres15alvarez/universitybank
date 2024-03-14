@@ -1,26 +1,44 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+
+const sections = [
+  {
+    name: 'Servicios',
+    to: ''
+  },
+  {
+    name: 'Sobre Nosotros',
+    to: '/about'
+  },
+  {
+    name: 'Contacto',
+    to: '/contact'
+  }
+]
+</script>
+
 <template>
   <v-toolbar class="d-none d-sm-flex" color="#fff">
-    <a href="/">
+    <RouterLink to="/">
       <img
         class="ml-10 ml-md-3 d-none d-md-flex w-75"
         src="https://universitybank.sirv.com/images/logo-no-background.png"
         width="300"
       />
-    </a>
+    </RouterLink>
 
     <v-container>
-      <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="primary">
-        <v-btn class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto" text="Servicios"></v-btn>
+      <v-btn-group class="mx-10 mx-md-2 mx-sm-1">
         <v-btn
+          v-for="section in sections"
+          :key="section.name"
           class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
-          text="Sobre Nosotros"
-          to="/about"
-        ></v-btn>
-        <v-btn
-          class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
-          text="Contacto"
-          to="/contact"
-        ></v-btn>
+          variant="text"
+          color="primary"
+          :text="section.name"
+          :to="section.to"
+        >
+        </v-btn>
       </v-btn-group>
     </v-container>
 
@@ -40,30 +58,13 @@
       <v-icon color="primary" size="x-large" icon="mdi-menu"></v-icon>
       <v-menu activator="parent">
         <v-list>
-          <v-list-item>
+          <v-list-item v-for="section in sections" :key="section.name">
             <v-btn
+              class="font-weight-bold text-subtitle-1 mx-8 mx-md-2 mx-sm-auto"
               variant="text"
-              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
-              text="Servicios"
               color="primary"
-            ></v-btn>
-          </v-list-item>
-          <v-list-item>
-            <v-btn
-              variant="text"
-              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
-              text="Sobre Nosotros"
-              color="primary"
-              to="/about"
-            ></v-btn>
-          </v-list-item>
-          <v-list-item>
-            <v-btn
-              variant="text"
-              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
-              text="Contacto"
-              color="primary"
-              to="/contact"
+              :text="section.name"
+              :to="section.to"
             ></v-btn>
           </v-list-item>
           <v-list-item>
@@ -79,12 +80,14 @@
       </v-menu>
     </v-btn>
 
-    <a href="/">
-      <img
-        class="ml-10 w-50"
-        src="https://universitybank.sirv.com/images/logo-no-background.png"
-        width="75"
-      />
-    </a>
+    <div class="text-center mr-16">
+      <RouterLink to="/">
+        <img
+          class="w-50"
+          src="https://universitybank.sirv.com/images/logo-no-background.png"
+          width="75"
+        />
+      </RouterLink>
+    </div>
   </v-toolbar>
 </template>
