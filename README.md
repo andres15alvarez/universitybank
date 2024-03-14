@@ -4,6 +4,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1bf17f15-70a6-4f6f-91d4-3dc363c56ed8/deploy-status)](https://app.netlify.com/sites/universitybank/deploys)
 ![Github Actions Status](https://github.com/andres15alvarez/universitybank/actions/workflows/main.yml/badge.svg)
+[![codecov](https://codecov.io/gh/andres15alvarez/universitybank/graph/badge.svg?token=T3B30DDZ3J)](https://codecov.io/gh/andres15alvarez/universitybank)
 
 ## Recommended IDE Setup
 
