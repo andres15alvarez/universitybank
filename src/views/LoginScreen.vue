@@ -5,10 +5,12 @@
     </div>
 
     <div class="div__form">
-      <img
-        src="https://universitybank.sirv.com/images/logo-no-background.png"
-        class="imgLogo__form"
-      />
+      <RouterLink to="/">
+        <img
+          src="https://universitybank.sirv.com/images/logo-no-background.png"
+          class="imgLogo__form"
+        />
+      </RouterLink>
 
       <h1 class="font-weigth-bold">Bienvenido</h1>
 
