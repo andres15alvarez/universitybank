@@ -18,7 +18,7 @@ const universityBankTheme: ThemeDefinition = {
   }
 }
 
-const vuetify = createVuetify({
+export const vuetify = createVuetify({
   theme: {
     defaultTheme: 'universityBankTheme',
     themes: {

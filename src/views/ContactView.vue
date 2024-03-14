@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue'
 import ContactCard from '@/components/ContactCard.vue'
+import FooterBar from '@/components/FooterBar.vue'
 </script>
 
 <template>
   <NavigationBar />
   <div class="text-center">
-    <h3>Contáctanos</h3>
+    <p class="font-weight-bold text-h4 text-md-h3 text-primary">Contáctanos</p>
   </div>
   <v-container>
     <v-row>
@@ -46,11 +47,5 @@ import ContactCard from '@/components/ContactCard.vue'
       </v-col>
     </v-row>
   </v-container>
+  <FooterBar />
 </template>
-
-<style>
-.grid {
-  display: flex;
-  justify-content: center;
-}
-</style>

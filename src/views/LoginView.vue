@@ -5,12 +5,12 @@
     </div>
 
     <div class="div__form">
-      <a href="/">
+      <RouterLink to="/">
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form"
         />
-      </a>
+      </RouterLink>
 
       <h1 class="font-weigth-bold">Bienvenido</h1>
 
@@ -34,7 +34,7 @@
       </v-btn>
       <div class="text-center">
         <p class="text-subtitle-1">¿Todavía no tienes una cuenta?</p>
-        <b><a href="#/signup">Crear una cuenta</a></b>
+        <b><RouterLink to="/signup">Crear una cuenta</RouterLink></b>
       </div>
     </div>
   </div>

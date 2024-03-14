@@ -1,3 +1,13 @@
+<script>
+export default {
+  props: {
+    icon: String,
+    title: String,
+    text: String
+  }
+}
+</script>
+
 <template>
   <container class="containerService">
     <div>
@@ -10,7 +20,7 @@
 
       <v-divider class="border-opacity-100" thickness="2" color="#085f63" length="90"></v-divider>
 
-      <p class="parrafoService">
+      <p class="mt-8 parrafoService text-black">
         {{ text }}
       </p>
     </div>
@@ -22,7 +32,6 @@
   display: inline-block;
   font-size: 25px;
   padding-bottom: 7px;
-
   line-height: 1.25;
 }
 .containerService {
@@ -35,13 +44,3 @@
   padding-left: 16px;
 }
 </style>
-
-<script>
-export default {
-  props: {
-    icon: String,
-    title: String,
-    text: String
-  }
-}
-</script>
