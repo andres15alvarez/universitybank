@@ -6,7 +6,7 @@ import FooterBar from '@/components/FooterBar.vue'
 <template>
   <NavigationBar />
   <div class="d-md-inline-flex align-center text-center text-md-start mx-5">
-    <div class="ml-md-10">
+    <div class="ml-md-10 blockContent">
       <p class="text-primary font-weight-bold text-h5 text-md-h4">
         Institución comprometida con los estudiantes universitarios
       </p>
@@ -14,12 +14,12 @@ import FooterBar from '@/components/FooterBar.vue'
         soluciones financieras ágiles y eficientes
       </p>
       <v-btn
-        class="font-weight-bold text-subtitle-1 text-md-h6 ml-md-15 mt-5"
+        class="font-weight-bold text-subtitle-1 text-md-h6 ml-md-15 mt-5 mx-auto"
         variant="flat"
         color="primary"
         size="large"
-        width="316"
         rounded="4"
+        width="316"
         text="¡Únete ahora!"
         to="/signUp"
       ></v-btn>
@@ -34,6 +34,11 @@ import FooterBar from '@/components/FooterBar.vue'
 </template>
 
 <style>
+.blockContent {
+  display: flex;
+  flex-direction: column;
+}
+
 p {
   color: rgba(0, 0, 0, 0.575);
 }
