@@ -9,20 +9,20 @@
     </a>
 
     <v-container>
-      <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="#085F63">
+      <v-btn-group variant="text" class="mx-10 mx-md-2 mx-sm-1" color="primary">
         <v-btn
-          class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+          class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
           text="Servicios"
           to="/services"
-        ></v-btn>
-
+        >
+        </v-btn>
         <v-btn
-          class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+          class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
           text="Sobre Nosotros"
           to="/about"
         ></v-btn>
         <v-btn
-          class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+          class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
           text="Contacto"
           to="/contact"
         ></v-btn>
@@ -30,9 +30,9 @@
     </v-container>
 
     <v-btn
-      class="navigationBtn mr-10 mr-md-3 text-none"
+      class="font-weight-bold text-h6 mr-10 mr-md-3 text-none"
       variant="flat"
-      color="#085F63"
+      color="primary"
       size="default"
       rounded="4"
       text="Acceder"
@@ -41,42 +41,42 @@
   </v-toolbar>
 
   <v-toolbar class="d-xs-flex d-sm-none" color="#fff">
-    <v-btn color="#085F63" icon="mdi-menu">
+    <v-btn>
+      <v-icon color="primary" size="x-large" icon="mdi-menu"></v-icon>
       <v-menu activator="parent">
         <v-list>
           <v-list-item>
             <v-btn
               variant="text"
-              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
               text="Servicios"
-              color="#085F63"
-              to="/services"
+              color="primary"
             ></v-btn>
           </v-list-item>
           <v-list-item>
             <v-btn
               variant="text"
-              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
               text="Sobre Nosotros"
-              color="#085F63"
+              color="primary"
               to="/about"
             ></v-btn>
           </v-list-item>
           <v-list-item>
             <v-btn
               variant="text"
-              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
               text="Contacto"
-              color="#085F63"
+              color="primary"
               to="/contact"
             ></v-btn>
           </v-list-item>
           <v-list-item>
             <v-btn
               variant="flat"
-              class="navigationBtn text-none mx-8 mx-md-2 mx-sm-auto"
+              class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
               text="Acceder"
-              color="#085F63"
+              color="primary"
               to="/login"
             ></v-btn>
           </v-list-item>
@@ -93,10 +93,3 @@
     </a>
   </v-toolbar>
 </template>
-
-<style>
-.navigationBtn {
-  font-size: 20px !important;
-  font-family: MontserratAlternates-Bold;
-}
-</style>

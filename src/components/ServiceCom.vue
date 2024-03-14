@@ -1,17 +1,17 @@
 <template>
   <container class="containerService">
     <div>
-      <v-icon :icon="iconService" size="60px" color="#085f63"></v-icon>
+      <v-icon :icon="icon" size="60px" color="#085f63"></v-icon>
     </div>
     <div class="divTextos">
       <h4 class="tituloService">
-        {{ titleService }}
+        {{ title }}
       </h4>
 
       <v-divider class="border-opacity-100" thickness="2" color="#085f63" length="90"></v-divider>
 
       <p class="parrafoService">
-        {{ textService }}
+        {{ text }}
       </p>
     </div>
   </container>
@@ -39,9 +39,9 @@
 <script>
 export default {
   props: {
-    iconService: String,
-    titleService: String,
-    textService: String
+    icon: String,
+    title: String,
+    text: String
   }
 }
 </script>
