@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 const sections = [
   {
     name: 'Servicios',
-    to: ''
+    to: '/services'
   },
   {
     name: 'Sobre Nosotros',

@@ -31,10 +31,6 @@ import NavigationBar from '@/components/NavigationBar.vue'
 </template>
 
 <style>
-.container {
-  align-items: center;
-}
-
 p {
   color: rgba(0, 0, 0, 0.575);
 }
