@@ -47,3 +47,4 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         slug: andres15alvarez/universitybank
+      run: npm run coverage
