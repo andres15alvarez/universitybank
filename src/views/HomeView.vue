@@ -20,6 +20,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
         width="316"
         rounded="4"
         text="¡Únete ahora!"
+        to="/signUp"
       ></v-btn>
     </div>
     <img
