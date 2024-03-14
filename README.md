@@ -19,12 +19,6 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
-## Initialize Husky
-
-```sh
-npx husky init
-```
-
 ### Compile and Hot-Reload for Development
 
 ```sh
