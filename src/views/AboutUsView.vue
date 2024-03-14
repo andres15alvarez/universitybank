@@ -7,72 +7,68 @@ import NavigationBar from '@/components/NavigationBar.vue'
   <div class="text-center">
     <h3>Sobre nosotros</h3>
   </div>
-  <v-container class="aboutUsContainer my-5 d-flex align-center">
-    <v-row>
-      <v-col>
-        <v-sheet class="d-flex justify-center my-5" color="transparent">
-          <v-card class="text-center" rounded="10" outlined color="transparent" width="400">
-            <div class="pa-6">
-              <v-card-title class="Montserrat-Bold my-2 whiteText titleFontSize"
-                >Visión</v-card-title
-              >
-              <v-divider
-                class="border-opacity-100 mx-auto"
-                thickness="2"
-                color="#085f63"
-                length="55"
-              ></v-divider>
-              <v-card-text class="Montserrat-SemiBold my-15 whiteText textFontSize">
-                Queremos ser la mejor opción financiera para estudiantes universitarios en el país.
-                Deseamos ser reconocidos por nuestros servicios innovadores, la calidad de atención
-                al cliente y nuestro compromiso con la educación y el desarrollo social.
-              </v-card-text>
-            </div>
-          </v-card>
-        </v-sheet>
-      </v-col>
-      <v-col>
-        <v-sheet class="d-flex justify-center my-5" color="transparent">
-          <v-card class="text-center" outlined color="transparent" rounded="10" width="400">
-            <div class="pa-6">
-              <v-card-title class="Montserrat-Bold my-2 whiteText titleFontSize"
-                >Misión</v-card-title
-              >
-              <v-divider
-                class="border-opacity-100 mx-auto"
-                thickness="2"
-                color="#085f63"
-                length="55"
-              ></v-divider>
-              <v-card-text class="Montserrat-SemiBold my-15 whiteText textFontSize">
-                Somos una institución financiera comprometida con los estudiantes universitarios,
-                brindando soluciones financieras ágiles y eficientes. Nuestra misión es facilitar la
-                gestión de sus recursos y contribuir al crecimiento económico y personal de nuestros
-                clientes.
-              </v-card-text>
-            </div>
-          </v-card>
-        </v-sheet>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="aboutUsContainer mx-16">
+    <v-container class="my-5 d-flex align-center" fill-height>
+      <v-row>
+        <v-col>
+          <v-sheet class="d-flex justify-center my-5" color="transparent">
+            <v-card class="text-center" outlined color="transparent" width="400">
+              <div class="pa-6">
+                <v-card-title class="font-weight-bold my-2 text-white text-h4">Visión</v-card-title>
+                <v-divider
+                  class="border-opacity-100 mx-auto"
+                  thickness="2"
+                  color="primary"
+                  length="55"
+                ></v-divider>
+                <v-card-text class="font-weight-medium my-15 text-white text-h5">
+                  Queremos ser la mejor opción financiera para estudiantes universitarios en el
+                  país. Deseamos ser reconocidos por nuestros servicios innovadores, la calidad de
+                  atención al cliente y nuestro compromiso con la educación y el desarrollo social.
+                </v-card-text>
+              </div>
+            </v-card>
+          </v-sheet>
+        </v-col>
+        <v-col>
+          <v-sheet class="d-flex justify-center my-5" color="transparent">
+            <v-card class="text-center" outlined color="transparent" width="400">
+              <div class="pa-6">
+                <v-card-title class="font-weight-bold my-2 text-white text-h4">Misión</v-card-title>
+                <v-divider
+                  class="border-opacity-100 mx-auto"
+                  thickness="2"
+                  color="primary"
+                  length="55"
+                ></v-divider>
+                <v-card-text class="font-weight-medium my-15 text-white text-h5">
+                  Somos una institución financiera comprometida con los estudiantes universitarios,
+                  brindando soluciones financieras ágiles y eficientes. Nuestra misión es facilitar
+                  la gestión de sus recursos y contribuir al crecimiento económico y personal de
+                  nuestros clientes.
+                </v-card-text>
+              </div>
+            </v-card>
+          </v-sheet>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <style>
 .aboutUsContainer {
-  background: url('https://universitybank.sirv.com/images/about-us.png');
-  background-size: cover;
+  position: relative;
 }
 
-.whiteText {
-  color: white;
-}
-
-.titleFontSize {
-  font-size: 36px !important;
-}
-
-.textFontSize {
-  font-size: 24px !important;
+.aboutUsContainer::before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 105%;
+  opacity: 0.93;
+  background-image: url('https://universitybank.sirv.com/images/about-us.png');
+  background-size: 100%;
+  background-repeat: repeat;
 }
 </style>

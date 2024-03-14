@@ -51,6 +51,7 @@
               class="font-weight-bold text-h6 mx-8 mx-md-2 mx-sm-auto"
               text="Servicios"
               color="primary"
+              to="/services"
             ></v-btn>
           </v-list-item>
           <v-list-item>
