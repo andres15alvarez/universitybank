@@ -10,7 +10,7 @@ import ServiceCom from '@/components/ServiceCom.vue'
   </div>
 
   <div class="containerServices">
-    <v-row no-gutters>
+    <v-row>
       <v-col>
         <div class="pa-2 ma-2">
           <ServiceCom
