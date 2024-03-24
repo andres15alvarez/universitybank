@@ -5,7 +5,7 @@ import { objectToSnake } from 'ts-case-convert'
 export class AuthClient extends Client {
   async login(email: string, password: string): Promise<LoginResponse | any> {
     const response = await this.post({
-      url: 'public/client/login',
+      url: 'public/client/user/login',
       needAuthorization: false,
       data: {
         email: email,
@@ -17,7 +17,7 @@ export class AuthClient extends Client {
 
   async create(user: CreateUser): Promise<UserResponse | any> {
     const response = await this.post({
-      url: 'public/client/register',
+      url: 'public/client/user/register',
       needAuthorization: false,
       data: {
         ...objectToSnake(user)
