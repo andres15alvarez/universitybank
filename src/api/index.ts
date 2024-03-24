@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance, type AxiosError } from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 import { BASE_URL } from '@/settings/settings'
 import { APIError } from '@/errors/api'
 import { objectToCamel } from 'ts-case-convert'
@@ -7,6 +7,7 @@ export interface ClientConfig {
   url: string
   needAuthorization: boolean
   data?: object
+  params?: object
 }
 
 export interface Response {
@@ -46,7 +47,8 @@ export class Client {
       response = await this.client.request({
         method: method,
         url: config.url,
-        data: config.data
+        data: config.data,
+        params: config.params
       })
     } catch (error: any) {
       throw APIError(error.message, error.response.status, error.response.data.errors)
