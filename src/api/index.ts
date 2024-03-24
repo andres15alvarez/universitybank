@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios, { type AxiosInstance, type AxiosError } from 'axios'
 import { BASE_URL } from '@/settings/settings'
 import { APIError } from '@/errors/api'
 import { objectToCamel } from 'ts-case-convert'
@@ -49,12 +49,9 @@ export class Client {
         data: config.data
       })
     } catch (error: any) {
-      throw APIError(error.message, 500, [''])
+      throw APIError(error.message, error.response.status, error.response.data.errors)
     }
     const data: Response = response.data
-    if (response.status >= 400) {
-      throw APIError(data.message, response.status, data.errors)
-    }
     return data
   }
 
