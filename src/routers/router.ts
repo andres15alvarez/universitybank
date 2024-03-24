@@ -4,9 +4,10 @@ import HomeView from '@/views/HomeView.vue'
 import AboutUsView from '@/views/AboutUsView.vue'
 import LoginScreen from '@/views/LoginView.vue'
 import ServicesView from '@/views/ServicesView.vue'
-import SignUpView from '@/views/SignUpView.vue'
-import SignUpView2 from '@/views/SignUpView2.vue'
-import SignUpView3 from '@/views/SignUpView3.vue'
+import MainView from '@/views/Dashboard/MainView.vue'
+import SignUpViewOne from '@/views/SignUp/SignUpViewOne.vue'
+import SignUpViewTwo from '@/views/SignUp/SignUpViewTwo.vue'
+import SignUpViewThree from '@/views/SignUp/SignUpViewThree.vue'
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -14,9 +15,20 @@ const routes = [
   { path: '/login', name: 'login', component: LoginScreen },
   { path: '/about', name: 'about', component: AboutUsView },
   { path: '/services', name: 'services', component: ServicesView },
-  { path: '/signUp', name: 'signup', component: SignUpView },
-  { path: '/signUp2', name: 'signup2', component: SignUpView2 },
-  { path: '/signUp3', name: 'signup3', component: SignUpView3 }
+  { path: '/signUp', name: 'signup', component: SignUpViewOne },
+  { path: '/signUp2', name: 'signup2', component: SignUpViewTwo },
+  { path: '/signUp3', name: 'signup3', component: SignUpViewThree },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: MainView,
+    meta: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      accountNumber: ''
+    }
+  }
 ]
 
 const router = createRouter({
