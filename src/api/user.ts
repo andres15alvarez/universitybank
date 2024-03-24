@@ -1,7 +1,8 @@
+import type { BalanceResponse } from '@/interfaces/user'
 import { Client } from '.'
 
 export class UserService extends Client {
-  async getBalance() {
+  async getBalance(): Promise<BalanceResponse | any> {
     const response = await this.get({
       url: 'client/user/balance',
       needAuthorization: true
