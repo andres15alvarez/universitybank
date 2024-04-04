@@ -2,7 +2,8 @@
 const props = defineProps({
   icon: String,
   title: String,
-  subtitle: String
+  subtitle: String,
+  url: String
 })
 </script>
 
@@ -17,7 +18,7 @@ const props = defineProps({
       length="55"
     ></v-divider>
     <v-card-text class="my-2">
-      {{ subtitle }}
+      <a target="_blank" :href="url">{{ subtitle }} </a>
     </v-card-text>
   </v-card>
 </template>

@@ -1,12 +1,24 @@
 <script setup lang="ts">
-const icons = ['mdi-facebook', 'mdi-instagram', 'mdi-twitter']
+const icons = [
+  { name: 'mdi-facebook', url: 'https://www.facebook.com/bancouniversitariove' },
+  { name: 'mdi-instagram', url: 'https://www.instagram.com/bancouniversitariove' },
+  { name: 'mdi-twitter', url: 'https://twitter.com/bancouniversitariove' }
+]
 </script>
 
 <template>
   <v-layout>
     <v-footer class="text-center d-flex flex-column transparent">
       <div>
-        <v-btn v-for="icon in icons" :key="icon" :icon="icon" class="mx-4" variant="text"></v-btn>
+        <v-btn
+          v-for="(icon, index) in icons"
+          :key="index"
+          :icon="icon.name"
+          :href="icon.url"
+          class="mx-4"
+          variant="text"
+          target="_blank"
+        ></v-btn>
       </div>
       <div>Copyrigth © <strong>Banco Universitario</strong> {{ new Date().getFullYear() }}</div>
     </v-footer>
