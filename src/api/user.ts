@@ -1,4 +1,4 @@
-import type { BalanceResponse } from '@/interfaces/user'
+import type { BalanceResponse, UserResponse } from '@/interfaces/user'
 import { Client } from '.'
 
 export class UserService extends Client {
@@ -10,7 +10,7 @@ export class UserService extends Client {
     return response
   }
 
-  async getProfile() {
+  async getProfile(): Promise<UserResponse | any> {
     const response = await this.get({
       url: 'client/user/whoami',
       needAuthorization: true
@@ -18,7 +18,7 @@ export class UserService extends Client {
     return response
   }
 
-  async searchUserByAccount(account: string) {
+  async searchUserByAccount(account: string): Promise<UserResponse | any> {
     const response = await this.get({
       url: `client/user/account/${account}`,
       needAuthorization: true

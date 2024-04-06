@@ -8,8 +8,8 @@ export class AuthService extends Client {
       url: 'public/client/user/login',
       needAuthorization: false,
       data: {
-        email: email,
-        password: password
+        email,
+        password
       }
     })
     return response
@@ -26,8 +26,8 @@ export class AuthService extends Client {
     return response
   }
 
-  async updatePassword(oldPassword: string, newPassword: string) {
-    const response = await this.patch({
+  async updatePassword(oldPassword: string, newPassword: string): Promise<Boolean> {
+    await this.patch({
       url: 'client/user/password',
       needAuthorization: true,
       data: objectToSnake({
@@ -35,6 +35,6 @@ export class AuthService extends Client {
         newPassword: newPassword
       })
     })
-    return response
+    return true
   }
 }
