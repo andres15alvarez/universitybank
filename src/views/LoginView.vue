@@ -1,3 +1,43 @@
+<script setup lang="ts">
+import { AuthService } from '@/api/auth'
+import type { LoginRequest, LoginResponse } from '@/interfaces/user'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const visible = ref(true)
+const isLoading = ref(false)
+const loginData = ref({
+  email: '',
+  password: ''
+} as LoginRequest)
+
+async function login() {
+  const client = new AuthService()
+  isLoading.value = true
+  await client
+    .login(loginData.value.email, loginData.value.password)
+    .then((response: LoginResponse) => {
+      localStorage.setItem('jwt', response.jwt)
+      router.beforeResolve((to) => {
+        to.meta.firstName = response.firstName
+        to.meta.lastName = response.lastName
+        to.meta.email = response.email
+        to.meta.accountNumber = response.accountNumber
+      })
+      router.push({ name: 'dashboard' })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => {
+      isLoading.value = false
+      loginData.value.email = ''
+      loginData.value.password = ''
+    })
+}
+</script>
+
 <template>
   <div class="containerLogin">
     <div class="div__img d-none d-sm-flex w-45">
@@ -15,12 +55,14 @@
       <h1 class="font-weigth-bold">Bienvenido</h1>
 
       <v-text-field
+        v-model="loginData.email"
         label="Correo electrónico"
         placeholder="Ingresa tu correo electrónico"
         variant="outlined"
       ></v-text-field>
 
       <v-text-field
+        v-model="loginData.password"
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'password' : 'text'"
         label="Contraseña"
@@ -29,7 +71,14 @@
         @click:append-inner="visible = !visible"
       ></v-text-field>
 
-      <v-btn block class="text-none" variant="flat" color="primary">
+      <v-btn
+        block
+        class="text-none"
+        variant="flat"
+        color="primary"
+        :loading="isLoading"
+        @click="login"
+      >
         <b>Iniciar sesión</b>
       </v-btn>
       <div class="text-center">
@@ -88,11 +137,3 @@ a {
   margin-top: 30px;
 }
 </style>
-
-<script>
-export default {
-  data: () => ({
-    visible: true
-  })
-}
-</script>
