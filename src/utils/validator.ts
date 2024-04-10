@@ -4,6 +4,16 @@ export function isEmail(value: string): boolean {
   return pattern.test(value)
 }
 
+export function isAlpha(value: string): boolean {
+  const pattern = /^[a-zA-Z]+$/
+  return pattern.test(value)
+}
+
+export function isNumber(value: string): boolean {
+  const pattern = /^\d+$/
+  return pattern.test(value)
+}
+
 export function isRequired(value: string): boolean {
   return !!value
 }
