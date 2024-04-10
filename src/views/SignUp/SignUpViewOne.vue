@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { isRequired, isEmail, isPasswordLengthCorrect } from '@/utils/validator'
+import { ref, watch } from 'vue'
+import { RouterLink } from 'vue-router'
+
+const passwordVisible = ref(true)
+const passwordRepeatVisible = ref(true)
+</script>
+
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
@@ -18,24 +27,27 @@
         label="Correo electrónico"
         placeholder="Ingresa tu correo electrónico"
         variant="outlined"
+        :rules="[isRequired, isEmail]"
       ></v-text-field>
 
       <v-text-field
-        :append-inner-icon="visible2 ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible2 ? 'password' : 'text'"
+        :append-inner-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="passwordVisible ? 'password' : 'text'"
+        :rules="[isRequired, isPasswordLengthCorrect]"
         label="Contraseña"
         placeholder="Ingresa tu contraseña"
         variant="outlined"
-        @click:append-inner="visible2 = !visible2"
+        @click:append-inner="passwordVisible = !passwordVisible"
       ></v-text-field>
 
       <v-text-field
-        :append-inner-icon="visible3 ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible3 ? 'password' : 'text'"
+        :append-inner-icon="passwordRepeatVisible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="passwordRepeatVisible ? 'password' : 'text'"
+        :rules="[isRequired, isPasswordLengthCorrect]"
         label="Repite contraseña"
         placeholder="Repite tu contraseña"
         variant="outlined"
-        @click:append-inner="visible3 = !visible3"
+        @click:append-inner="passwordRepeatVisible = !passwordRepeatVisible"
       ></v-text-field>
 
       <div class="text-end">
@@ -99,14 +111,3 @@
   }
 }
 </style>
-
-<script>
-import { RouterLink } from 'vue-router'
-
-export default {
-  data: () => ({
-    visible2: true,
-    visible3: true
-  })
-}
-</script>

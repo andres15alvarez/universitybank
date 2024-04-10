@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { isRequired, isAlpha, isNumber } from '@/utils/validator'
+</script>
+
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
@@ -18,18 +22,21 @@
         label="Nombres"
         placeholder="Ingresa tus nombres"
         variant="outlined"
+        :rules="[isRequired, isAlpha]"
       ></v-text-field>
 
       <v-text-field
         label="Apellidos"
         placeholder="Ingresa tus apellidos"
         variant="outlined"
+        :rules="[isRequired, isAlpha]"
       ></v-text-field>
 
       <v-text-field
         label="Cédula"
         placeholder="Ingresa tu cédula de identidad"
         variant="outlined"
+        :rules="[isRequired, isNumber]"
       ></v-text-field>
 
       <div class="text-end">
@@ -40,12 +47,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data: () => ({
-    visible2: true,
-    visible3: true
-  })
-}
-</script>
