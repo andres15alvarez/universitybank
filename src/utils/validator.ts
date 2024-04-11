@@ -23,6 +23,14 @@ export function isPasswordLengthCorrect(value: string): boolean {
   return value.length >= 8 && value.length <= 16
 }
 
+export function isDateValid(value: string): boolean {
+  try {
+    return new Date(value) < new Date(new Date().toDateString())
+  } catch (error) {
+    return false
+  }
+}
+
 export function checkNumber(event: KeyboardEvent) {
   if (event.key.length === 1 && !numberPattern.test(event.key)) {
     event.preventDefault()
