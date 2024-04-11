@@ -15,9 +15,9 @@ const routes = [
   { path: '/login', name: 'login', component: LoginScreen },
   { path: '/about', name: 'about', component: AboutUsView },
   { path: '/services', name: 'services', component: ServicesView },
-  { path: '/signUp', name: 'signup', component: SignUpViewOne },
-  { path: '/signUp2', name: 'signup2', component: SignUpViewTwo },
-  { path: '/signUp3', name: 'signup3', component: SignUpViewThree },
+  { path: '/signup', name: 'signup', component: SignUpViewOne },
+  { path: '/signuptwo', name: 'signuptwo', component: SignUpViewTwo },
+  { path: '/signupthree', name: 'signupthree', component: SignUpViewThree },
   {
     path: '/dashboard',
     name: 'dashboard',
