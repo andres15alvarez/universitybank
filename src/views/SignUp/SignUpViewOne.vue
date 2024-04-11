@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { isRequired, isEmail, isPasswordLengthCorrect } from '@/utils/validator'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
 const passwordVisible = ref(true)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isRequired, isAlpha, isNumber } from '@/utils/validator'
+import { isRequired, isAlpha, isNumber, checkNumber, checkAlpha } from '@/utils/validator'
 </script>
 
 <template>
@@ -22,21 +22,27 @@ import { isRequired, isAlpha, isNumber } from '@/utils/validator'
         label="Nombres"
         placeholder="Ingresa tus nombres"
         variant="outlined"
+        maxlength="40"
         :rules="[isRequired, isAlpha]"
+        @keydown="checkAlpha"
       ></v-text-field>
 
       <v-text-field
         label="Apellidos"
         placeholder="Ingresa tus apellidos"
         variant="outlined"
+        maxlength="40"
         :rules="[isRequired, isAlpha]"
+        @keydown="checkAlpha"
       ></v-text-field>
 
       <v-text-field
         label="Cédula"
         placeholder="Ingresa tu cédula de identidad"
         variant="outlined"
+        maxlength="20"
         :rules="[isRequired, isNumber]"
+        @keydown="checkNumber"
       ></v-text-field>
 
       <div class="text-end">

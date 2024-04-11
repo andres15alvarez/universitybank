@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isRequired, isAlpha, isNumber } from '@/utils/validator'
+import { isRequired, isNumber } from '@/utils/validator'
 </script>
 
 <template>
@@ -22,6 +22,7 @@ import { isRequired, isAlpha, isNumber } from '@/utils/validator'
         label="Teléfono"
         placeholder="Ingresa tu número de teléfono"
         variant="outlined"
+        maxlength="20"
         :rules="[isRequired, isNumber]"
       ></v-text-field>
 
