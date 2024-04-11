@@ -21,7 +21,7 @@ import FooterBar from '@/components/FooterBar.vue'
         rounded="4"
         width="316"
         text="¡Únete ahora!"
-        to="/signUp"
+        to="/signup"
       ></v-btn>
     </div>
     <img

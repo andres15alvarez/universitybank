@@ -1,3 +1,61 @@
+<script setup lang="ts">
+import { isRequired, isEmail, isPasswordLengthCorrect } from '@/utils/validator'
+import { ref, watch } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const currentRoute = router.currentRoute.value
+const passwordVisible = ref(true)
+const passwordRepeatVisible = ref(true)
+const buttonDisabled = ref(true)
+const errorMessage = ref(currentRoute.meta.errorMessage)
+const accountData = ref({
+  email: typeof currentRoute.meta.email === 'string' ? currentRoute.meta.email : '',
+  password: typeof currentRoute.meta.password === 'string' ? currentRoute.meta.password : '',
+  passwordRepeated:
+    typeof currentRoute.meta.password === 'string' ? currentRoute.meta.password : '',
+  firstName: currentRoute.meta.firstName,
+  lastName: currentRoute.meta.lastName,
+  documentNumber: currentRoute.meta.documentNumber,
+  phoneNumber: currentRoute.meta.phoneNumber,
+  birthDate: currentRoute.meta.birthDate
+})
+
+watch(
+  accountData,
+  (oldData, newData) => {
+    if (
+      isRequired(newData.email) &&
+      isRequired(newData.password) &&
+      isRequired(newData.passwordRepeated) &&
+      isEmail(newData.email) &&
+      isPasswordLengthCorrect(newData.password) &&
+      isPasswordLengthCorrect(newData.passwordRepeated) &&
+      newData.password == newData.passwordRepeated
+    ) {
+      buttonDisabled.value = false
+    } else {
+      buttonDisabled.value = true
+    }
+  },
+  { deep: true }
+)
+
+function nextStep() {
+  router.beforeResolve((to) => {
+    to.meta.email = accountData.value.email
+    to.meta.password = accountData.value.password
+    to.meta.firstName = accountData.value.firstName
+    to.meta.lastName = accountData.value.lastName
+    to.meta.documentNumber = accountData.value.documentNumber
+    to.meta.phoneNumber = accountData.value.phoneNumber
+    to.meta.birthDate = accountData.value.birthDate
+  })
+  router.push({ name: 'signuptwo' })
+}
+</script>
+
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
@@ -13,33 +71,47 @@
       </RouterLink>
 
       <h1>Crear una cuenta</h1>
-
+      <div class="text-center mb-2">
+        <p class="text-subtitle-1 text-red">{{ errorMessage }}</p>
+      </div>
       <v-text-field
+        v-model="accountData.email"
         label="Correo electrónico"
         placeholder="Ingresa tu correo electrónico"
         variant="outlined"
+        :rules="[isRequired, isEmail]"
       ></v-text-field>
 
       <v-text-field
-        :append-inner-icon="visible2 ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible2 ? 'password' : 'text'"
+        v-model="accountData.password"
+        :append-inner-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="passwordVisible ? 'password' : 'text'"
+        :rules="[isRequired, isPasswordLengthCorrect]"
         label="Contraseña"
         placeholder="Ingresa tu contraseña"
         variant="outlined"
-        @click:append-inner="visible2 = !visible2"
+        @click:append-inner="passwordVisible = !passwordVisible"
       ></v-text-field>
 
       <v-text-field
-        :append-inner-icon="visible3 ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible3 ? 'password' : 'text'"
+        v-model="accountData.passwordRepeated"
+        :append-inner-icon="passwordRepeatVisible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="passwordRepeatVisible ? 'password' : 'text'"
+        :rules="[isRequired, isPasswordLengthCorrect]"
         label="Repite contraseña"
         placeholder="Repite tu contraseña"
         variant="outlined"
-        @click:append-inner="visible3 = !visible3"
+        @click:append-inner="passwordRepeatVisible = !passwordRepeatVisible"
       ></v-text-field>
 
       <div class="text-end">
-        <v-btn class="text-none" variant="flat" color="#085F63" to="/signUp2">
+        <v-btn
+          class="text-none"
+          variant="flat"
+          color="#085F63"
+          :disabled="buttonDisabled"
+          @click="nextStep"
+        >
           <b>Siguiente</b>
         </v-btn>
       </div>
@@ -99,14 +171,3 @@
   }
 }
 </style>
-
-<script>
-import { RouterLink } from 'vue-router'
-
-export default {
-  data: () => ({
-    visible2: true,
-    visible3: true
-  })
-}
-</script>
