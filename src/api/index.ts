@@ -51,7 +51,7 @@ export class Client {
         params: config.params
       })
     } catch (error: any) {
-      throw APIError(error.message, error.response.status, error.response.data.errors)
+      throw APIError(error.response.data.message, error.response.status, error.response.data.errors)
     }
     const data: Response = response.data
     return data
