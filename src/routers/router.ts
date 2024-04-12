@@ -23,10 +23,7 @@ const routes = [
     name: 'dashboard',
     component: MainView,
     meta: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      accountNumber: ''
+      requiredLogin: true
     }
   }
 ]
@@ -34,6 +31,13 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiredLogin && !localStorage.getItem('jwt')) {
+    next('login')
+  } else {
+    next()
+  }
 })
 
 export default router
