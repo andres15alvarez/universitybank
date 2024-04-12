@@ -6,7 +6,7 @@ export class MovementService extends Client {
   async getMovements(
     page: number | null,
     pageSize: number | null,
-    multiplier: number | null
+    multiplier: number | null = null
   ): Promise<Array<Movement> | any> {
     const response = await this.get({
       url: 'client/movement',
