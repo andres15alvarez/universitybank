@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { MovementService } from '@/api/movement'
 import { UserService } from '@/api/user'
+import type { Movement } from '@/interfaces/movement'
 import type { BalanceResponse } from '@/interfaces/user'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const currentRoute = router.currentRoute.value
+const drawer = ref(false)
+const balanceShow = ref(true)
+const transferenciasShow = ref(false)
+const contactosShow = ref(false)
+const movements = ref(new Array<Movement>())
 const userData = ref({
   firstName: currentRoute.meta.firstName,
   lastName: currentRoute.meta.lastName,
@@ -13,6 +20,11 @@ const userData = ref({
   accountNumber: currentRoute.meta.accountNumber
 })
 let balance = ref(0)
+
+function logout() {
+  localStorage.removeItem('jwt')
+  router.push({ name: 'home' })
+}
 
 function getBalance() {
   const client = new UserService()
@@ -26,14 +38,22 @@ function getBalance() {
     })
 }
 
+function getMovements(page: number) {
+  const client = new MovementService()
+  client
+    .getMovements(page, 20)
+    .then((response: Array<Movement>) => {
+      movements.value = response
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 onMounted(() => {
   getBalance()
+  getMovements(1)
 })
-
-const drawer = ref(false)
-const balanceShow = ref(true)
-const transferenciasShow = ref(false)
-const contactosShow = ref(false)
 </script>
 
 <template>
@@ -50,11 +70,9 @@ const contactosShow = ref(false)
 
       <v-list>
         <v-list-item prepend-icon="mdi-face-man-profile" link title="Perfil"> </v-list-item>
-
-        <v-list-item prepend-icon="mdi-lock-reset" link title="Actualizar contraseña">
+        <v-list-item prepend-icon="mdi-lock-reset" link title="Actualizar contraseña"></v-list-item>
+        <v-list-item prepend-icon="mdi-logout" link title="Cerrar sesión" @click="logout">
         </v-list-item>
-
-        <v-list-item prepend-icon="mdi-logout" link title="Cerrar sesión" to="/"> </v-list-item>
       </v-list>
     </v-menu>
   </v-toolbar>
@@ -75,18 +93,8 @@ const contactosShow = ref(false)
           title="Balance"
           @click="(balanceShow = true), (transferenciasShow = false), (contactosShow = false)"
         ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-bank-transfer"
-          link
-          title="Transferencias"
-          @click="(balanceShow = false), (transferenciasShow = true), (contactosShow = false)"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-contacts"
-          link
-          title="Contactos"
-          @click="(balanceShow = false), (transferenciasShow = false), (contactosShow = true)"
-        ></v-list-item>
+        <v-list-item prepend-icon="mdi-bank-transfer" link title="Transferencias"></v-list-item>
+        <v-list-item prepend-icon="mdi-contacts" link title="Contactos"></v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-layout>
@@ -114,14 +122,13 @@ const contactosShow = ref(false)
           </tr>
         </thead>
         <tbody>
-          <!-- <tr v-for="item in movements"> </tr> -->
-          <tr>
-            <td>reference</td>
-            <td>accountNumber</td>
-            <td>description</td>
-            <td>amount</td>
-            <td>balance</td>
-            <td>date</td>
+          <tr v-for="mov in movements" :key="mov.id">
+            <td>{{ mov.id }}</td>
+            <td>{{ mov.accountNumber }}</td>
+            <td>{{ mov.description }}</td>
+            <td>{{ mov.amount * mov.multiplier }}</td>
+            <td>{{ mov.balance }}</td>
+            <td>{{ mov.createdAt }}</td>
           </tr>
         </tbody>
       </v-table>
