@@ -8,6 +8,7 @@ import MainView from '@/views/Dashboard/MainView.vue'
 import SignUpViewOne from '@/views/SignUp/SignUpViewOne.vue'
 import SignUpViewTwo from '@/views/SignUp/SignUpViewTwo.vue'
 import SignUpViewThree from '@/views/SignUp/SignUpViewThree.vue'
+import DashboardGus from '@/views/Dashboard/DashboardGus.vue' // ojito
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -25,7 +26,8 @@ const routes = [
     meta: {
       requiredLogin: true
     }
-  }
+  },
+  { path: '/dashboardGus', name: 'dashboardGus', component: DashboardGus } // ojito
 ]
 
 const router = createRouter({
