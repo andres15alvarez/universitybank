@@ -93,8 +93,18 @@ onMounted(() => {
           title="Balance"
           @click="(balanceShow = true), (transferenciasShow = false), (contactosShow = false)"
         ></v-list-item>
-        <v-list-item prepend-icon="mdi-bank-transfer" link title="Transferencias"></v-list-item>
-        <v-list-item prepend-icon="mdi-contacts" link title="Contactos"></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-bank-transfer"
+          link
+          title="Transferencias"
+          @click="(balanceShow = false), (transferenciasShow = true), (contactosShow = false)"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-contacts"
+          link
+          title="Contactos"
+          @click="(balanceShow = false), (transferenciasShow = false), (contactosShow = true)"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-layout>

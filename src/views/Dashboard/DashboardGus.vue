@@ -62,7 +62,7 @@ onMounted(() => {
     <v-toolbar-title>Banco Universitario</v-toolbar-title>
     <v-spacer></v-spacer>
 
-    <v-menu color="#085F63" location="bottom">
+    <v-menu location="bottom">
       <template v-slot:activator="{ props }">
         <v-btn icon v-bind="props">
           <v-icon color="white">mdi-account</v-icon>
@@ -76,6 +76,7 @@ onMounted(() => {
           title="Actualizar contraseña"
           to="/changePassword"
         ></v-list-item>
+        <v-divider></v-divider>
         <v-list-item
           prepend-icon="mdi-logout"
           link
@@ -120,14 +121,10 @@ onMounted(() => {
 
   <main :class="{ 'main--dashboard': drawer == true }">
     <v-container>
-      <div icon="mdi-view-dashboard">
-        <h2>Dashboard</h2>
-      </div>
-      <v-spacer></v-spacer>
-
+      <h2>Dashboard</h2>
       <v-row>
         <v-col>
-          <v-card class="mx-auto" hover variant="elevated" title="Bienvenido(a)">
+          <v-card class="mx-auto rounded-lg" hover variant="elevated" title="Bienvenido(a)">
             <template v-slot:prepend>
               <v-avatar color="#49beb7">
                 <v-icon color="#FFFFFF" icon="mdi-account"></v-icon>
@@ -139,7 +136,7 @@ onMounted(() => {
           </v-card>
         </v-col>
         <v-col>
-          <v-card class="mx-auto" hover variant="elevated" title="Balance">
+          <v-card class="mx-auto rounded-lg" hover variant="elevated" title="Balance">
             <template v-slot:prepend>
               <v-avatar color="#49beb7">
                 <v-icon color="#FFFFFF" icon="mdi-wallet-bifold"></v-icon>
@@ -154,7 +151,7 @@ onMounted(() => {
 
       <v-row>
         <v-col>
-          <v-card hover class="ma-5 text-white" variant="elevated" color="#49beb7">
+          <v-card hover class="text-white rounded-lg" variant="elevated" color="#49beb7">
             <template v-slot:prepend>
               <v-card-title>Número de cuenta:</v-card-title>
             </template>
@@ -164,7 +161,7 @@ onMounted(() => {
             </template>
           </v-card>
           <div class="rounded-2xl flex-col dark:bg-slate-900/70 bg-white flex">
-            <h2 class="ma-5">Movimientos</h2>
+            <h2>Movimientos</h2>
 
             <v-table class="ma-5" fixed-header>
               <thead>
@@ -187,8 +184,7 @@ onMounted(() => {
                   <!-- Aqui pense en un v-if (para cambiar el color a rojo si era un egreso) pero dice que no se recomienda usar junto con un v-for -->
                   <td>{{ mov.balance.toFixed(2) }}</td>
                   <!-- .toFixed(2) fixea la cantidad con dos decimales -->
-                  <td>{{ mov.createdAt }}</td>
-                  <!-- getUTCDate es la funcion que se debe usar para que muestre la fecha -->
+                  <td>{{ new Date(mov.createdAt).toLocaleDateString('en-GB') }}</td>
                 </tr>
               </tbody>
             </v-table>
