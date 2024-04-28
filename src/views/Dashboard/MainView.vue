@@ -58,7 +58,7 @@ onMounted(() => {
         <v-col>
           <v-card class="mx-auto rounded-lg" hover variant="elevated" title="Bienvenido(a)">
             <template v-slot:prepend>
-              <v-avatar color="#49beb7">
+              <v-avatar color="secondary">
                 <v-icon color="#FFFFFF" icon="mdi-account"></v-icon>
               </v-avatar>
             </template>
@@ -70,7 +70,7 @@ onMounted(() => {
         <v-col>
           <v-card class="mx-auto rounded-lg" hover variant="elevated" title="Balance">
             <template v-slot:prepend>
-              <v-avatar color="#49beb7">
+              <v-avatar color="secondary">
                 <v-icon color="#FFFFFF" icon="mdi-wallet-bifold"></v-icon>
               </v-avatar>
             </template>
@@ -82,7 +82,7 @@ onMounted(() => {
       </v-row>
       <v-row>
         <v-col>
-          <v-card hover class="text-white rounded-lg" variant="elevated" color="#49beb7">
+          <v-card hover class="text-white rounded-lg" variant="elevated" color="secondary">
             <template v-slot:prepend>
               <v-card-title>Número de cuenta:</v-card-title>
             </template>
