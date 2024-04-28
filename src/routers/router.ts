@@ -8,6 +8,7 @@ import MainView from '@/views/Dashboard/MainView.vue'
 import SignUpViewOne from '@/views/SignUp/SignUpViewOne.vue'
 import SignUpViewTwo from '@/views/SignUp/SignUpViewTwo.vue'
 import SignUpViewThree from '@/views/SignUp/SignUpViewThree.vue'
+import UpdatePasswordView from '@/views/Dashboard/UpdatePasswordView.vue'
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -22,6 +23,14 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: MainView,
+    meta: {
+      requiredLogin: true
+    }
+  },
+  {
+    path: '/updatepassword',
+    name: 'updatePassword',
+    component: UpdatePasswordView,
     meta: {
       requiredLogin: true
     }
