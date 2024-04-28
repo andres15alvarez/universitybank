@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import { MovementService } from '@/api/movement'
 import { UserService } from '@/api/user'
+import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Movement } from '@/interfaces/movement'
-import type { BalanceResponse } from '@/interfaces/user'
+import type { BalanceResponse, UserResponse } from '@/interfaces/user'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const currentRoute = router.currentRoute.value
 const drawer = ref(false)
-const balanceShow = ref(true)
-const transferenciasShow = ref(false)
-const contactosShow = ref(false)
 const movements = ref(new Array<Movement>())
 const userData = ref({
   firstName: currentRoute.meta.firstName,
@@ -21,9 +19,23 @@ const userData = ref({
 })
 let balance = ref(0)
 
-function logout() {
-  localStorage.removeItem('jwt')
-  router.push({ name: 'home' })
+function amountTextColor(multiplier: number): string {
+  return multiplier == -1 ? 'text-red' : 'text-black'
+}
+
+function getUserData() {
+  const client = new UserService()
+  client
+    .getProfile()
+    .then((response: UserResponse) => {
+      userData.value.firstName = response.firstName
+      userData.value.lastName = response.lastName
+      userData.value.accountNumber = response.accountNumber
+      userData.value.email = response.email
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 function getBalance() {
@@ -38,10 +50,10 @@ function getBalance() {
     })
 }
 
-function getMovements(page: number) {
+function getMovements(page: number, pageSize: number) {
   const client = new MovementService()
   client
-    .getMovements(page, 20)
+    .getMovements(page, pageSize)
     .then((response: Array<Movement>) => {
       movements.value = response
     })
@@ -51,98 +63,84 @@ function getMovements(page: number) {
 }
 
 onMounted(() => {
+  getUserData()
   getBalance()
-  getMovements(1)
+  getMovements(1, 10)
 })
 </script>
 
 <template>
-  <v-toolbar clipped-left color="#085F63">
-    <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
-    <v-toolbar-title>Banco Universitario</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-menu location="bottom">
-      <template v-slot:activator="{ props }">
-        <v-btn icon v-bind="props">
-          <v-icon color="white">mdi-account</v-icon>
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item prepend-icon="mdi-face-man-profile" link title="Perfil"> </v-list-item>
-        <v-list-item prepend-icon="mdi-lock-reset" link title="Actualizar contraseña"></v-list-item>
-        <v-list-item prepend-icon="mdi-logout" link title="Cerrar sesión" @click="logout">
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </v-toolbar>
-
-  <v-layout>
-    <v-navigation-drawer
-      v-model="drawer"
-      location="left"
-      permanent
-      color="#085F63"
-      :width="210"
-      class="v-navigation-drawer__dashboard"
-    >
-      <v-list>
-        <v-list-item
-          prepend-icon="mdi-scale-balance"
-          link
-          title="Balance"
-          @click="(balanceShow = true), (transferenciasShow = false), (contactosShow = false)"
-        ></v-list-item>
-        <v-list-item prepend-icon="mdi-bank-transfer" link title="Transferencias"></v-list-item>
-        <v-list-item prepend-icon="mdi-contacts" link title="Contactos"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-layout>
-
+  <MainToolbar />
   <main :class="{ 'main--dashboard': drawer == true }">
-    <div v-show="balanceShow">
-      <h2 class="ma-5">Bienvenido(a) {{ userData.lastName }}, {{ userData.firstName }}</h2>
-
-      <v-card class="ma-5 text-white" variant="elevated" color="#49beb7">
-        <v-card-title>Número de cuenta: {{ userData.accountNumber }}</v-card-title>
-        <v-card-text>Balance: {{ balance }}</v-card-text>
-      </v-card>
-
-      <h2 class="ma-5">Movimientos</h2>
-
-      <v-table class="ma-5" fixed-header>
-        <thead>
-          <tr>
-            <th class="text-left">Referencia</th>
-            <th class="text-left">Cuenta</th>
-            <th class="text-left">Descripción</th>
-            <th class="text-left">Monto</th>
-            <th class="text-left">Balance</th>
-            <th class="text-left">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="mov in movements" :key="mov.id">
-            <td>{{ mov.id }}</td>
-            <td>{{ mov.accountNumber }}</td>
-            <td>{{ mov.description }}</td>
-            <td>{{ mov.amount * mov.multiplier }}</td>
-            <td>{{ mov.balance }}</td>
-            <td>{{ mov.createdAt }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-
-      <v-data-table-server :items-length="10"></v-data-table-server>
-    </div>
-
-    <div v-show="transferenciasShow">
-      <h2>REALIZA TUS TRANSFERENCIAS</h2>
-    </div>
-
-    <div v-show="contactosShow">
-      <h2>CONTACTOSSS</h2>
-    </div>
+    <v-container>
+      <h2>Dashboard</h2>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-card class="rounded-lg" variant="elevated" title="Bienvenido(a)">
+            <template v-slot:prepend>
+              <v-avatar color="secondary">
+                <v-icon color="#FFFFFF" icon="mdi-account"></v-icon>
+              </v-avatar>
+            </template>
+            <template v-slot:append>
+              <v-card-text>{{ userData.lastName }}, {{ userData.firstName }}</v-card-text>
+            </template>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-card class="rounded-lg" variant="elevated" title="Balance">
+            <template v-slot:prepend>
+              <v-avatar color="secondary">
+                <v-icon color="#FFFFFF" icon="mdi-wallet-bifold"></v-icon>
+              </v-avatar>
+            </template>
+            <template v-slot:append>
+              <v-card-text>{{ balance.toFixed(2) }}</v-card-text>
+            </template>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card class="text-white rounded-lg" variant="elevated" color="secondary">
+            <template v-slot:prepend>
+              <v-card-title>Número de cuenta:</v-card-title>
+            </template>
+            <template v-slot:append>
+              <v-card-text> {{ userData.accountNumber }}</v-card-text>
+            </template>
+          </v-card>
+        </v-col>
+      </v-row>
+      <div class="ma-5 rounded-2xl flex-col dark:bg-slate-900/70 bg-white flex">
+        <h2>Movimientos</h2>
+        <v-table fixed-header>
+          <thead>
+            <tr>
+              <th class="text-left">Referencia</th>
+              <th class="text-left">Cuenta</th>
+              <th class="text-left">Descripción</th>
+              <th class="text-left">Monto</th>
+              <th class="text-left">Balance</th>
+              <th class="text-left">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="mov in movements" :key="mov.id">
+              <td>{{ mov.id }}</td>
+              <td>{{ mov.accountNumber }}</td>
+              <td>{{ mov.description }}</td>
+              <td :class="amountTextColor(mov.multiplier)">
+                {{ (mov.amount * mov.multiplier).toFixed(2) }}
+              </td>
+              <td>{{ mov.balance.toFixed(2) }}</td>
+              <td>{{ new Date(mov.createdAt).toLocaleDateString('en-GB') }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+        <v-data-table-server :items-length="10"></v-data-table-server>
+      </div>
+    </v-container>
   </main>
 </template>
 
