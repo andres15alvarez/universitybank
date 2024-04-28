@@ -14,7 +14,8 @@ import router from './routers/router'
 const universityBankTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    primary: '#085F63'
+    primary: '#085F63',
+    secondary: '#49BEB7'
   }
 }
 
