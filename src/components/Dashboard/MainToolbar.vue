@@ -44,9 +44,11 @@ function logout() {
     <v-navigation-drawer
       v-model="drawer"
       location="left"
-      temporary
       color="#085F63"
       :width="210"
+      :absolute="true"
+      :disable-resize-watcher="true"
+      temporary
       class="v-navigation-drawer__dashboard"
     >
       <v-list>
@@ -60,13 +62,13 @@ function logout() {
           prepend-icon="mdi-bank-transfer"
           link
           title="Transferencias"
-          to="/dashboard"
+          to="/transfers"
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-contacts"
           link
           title="Contactos"
-          to="/dashboard"
+          to="/contacts"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>

@@ -9,6 +9,9 @@ import SignUpViewOne from '@/views/SignUp/SignUpViewOne.vue'
 import SignUpViewTwo from '@/views/SignUp/SignUpViewTwo.vue'
 import SignUpViewThree from '@/views/SignUp/SignUpViewThree.vue'
 import UpdatePasswordView from '@/views/Dashboard/UpdatePasswordView.vue'
+import TransfersView from '@/views/Dashboard/TransfersView.vue'
+import ContactsView from '@/views/Dashboard/ContactsView.vue'
+import ProfileView from '@/views/Dashboard/ProfileView.vue'
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -34,7 +37,10 @@ const routes = [
     meta: {
       requiredLogin: true
     }
-  }
+  },
+  { path: '/transfers', name: 'transfers', component: TransfersView },
+  { path: '/contacts', name: 'contacts', component: ContactsView },
+  { path: '/profile', name: 'profile', component: ProfileView }
 ]
 
 const router = createRouter({

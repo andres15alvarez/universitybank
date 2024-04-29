@@ -42,3 +42,12 @@ export function checkAlpha(event: KeyboardEvent) {
     event.preventDefault()
   }
 }
+
+export function isPositiveFloat(value: string): boolean {
+  const pattern2 = /^\d+(\.\d{1,2})?$/
+  return pattern2.test(value)
+}
+
+export function isAccountNumberLengthCorrect(value: string): boolean {
+  return value.length == 20
+}

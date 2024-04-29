@@ -62,13 +62,20 @@ function updatePassword() {
 <template>
   <MainToolbar />
   <v-container>
-    <h2>Actualización de Contraseña</h2>
+    <h2 style="color: #085f63">Actualización de Contraseña</h2>
     <v-row>
       <v-col>
         <v-card
           class="rounded-lg d-flex align-center flex-column mt-2 mb-5"
           variant="elevated"
-          color="secondary"
+          style="
+            background: linear-gradient(
+              150deg,
+              rgb(73 190 183 / 58%) 0%,
+              rgb(73 190 180 / 52%) 35%,
+              rgb(223 255 242 / 74%) 74%
+            );
+          "
         >
           <p class="text-subtitle-1 text-red mt-5">{{ errorMessage }}</p>
           <p class="text-subtitle-1 text-black mt-5">
