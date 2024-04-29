@@ -70,10 +70,10 @@ function updatePassword() {
           variant="elevated"
           style="
             background: linear-gradient(
-              150deg,
-              rgb(73 190 183 / 58%) 0%,
-              rgb(73 190 180 / 52%) 35%,
-              rgb(223 255 242 / 74%) 74%
+              180deg,
+              rgb(73 190 183) 50%,
+              rgb(73 190 183) 25%,
+              rgb(223 255 242) 94%
             );
           "
         >

@@ -57,10 +57,18 @@ function getBalance() {
         <v-row justify="center">
           <v-col
             cols="5"
-            style="background: linear-gradient(rgb(73 190 183 / 58%) 10%, rgb(73 190 180 / 52%) 15%, rgb(223 255 242 / 14%)"
+            style="
+              background: linear-gradient(
+                180deg,
+                rgb(73 190 183) 0%,
+                rgb(73 190 183) 25%,
+                rgb(223 255 242) 94%
+              );
+            "
           >
             <h2 style="color: #085f63">Transferencias a terceros</h2>
             <v-select
+              bg-color="white"
               :items="['12345678901234567890', 'no deberia ser asi :(']"
               label="Cuenta a debitar"
               variant="outlined"
@@ -72,6 +80,7 @@ function getBalance() {
             </v-select>
 
             <v-select
+              bg-color="white"
               v-if="registrado"
               :items="contacts"
               label="Contactos registrados"
