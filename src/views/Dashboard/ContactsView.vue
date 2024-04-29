@@ -35,11 +35,11 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
             </thead>
 
             <tbody>
-              <tr v-for="con in contacts" :key="con.accountNumber">
-                <td>{{ con.accountNumber }}</td>
-                <td>{{ con.alias }}</td>
-                <td>{{ con.description }}</td>
-                <td>Hola</td>
+              <tr>
+                <td>29819812892189 test</td>
+                <td>Carlos pana test</td>
+                <td>Pago pasaje test</td>
+                <td>ver, editar, eliminar</td>
               </tr>
             </tbody>
           </v-table>
