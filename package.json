@@ -19,6 +19,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "axios": "^1.6.8",
+    "maska": "^2.1.11",
     "ts-case-convert": "^2.0.7",
     "vite-plugin-vuetify": "^2.0.3",
     "vue": "^3.4.15",
