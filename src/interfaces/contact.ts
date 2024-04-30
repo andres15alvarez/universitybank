@@ -2,7 +2,7 @@ import type { User } from './user'
 
 export interface Contact {
   id: number
-  documentNumber: string
+  accountNumber: string
   alias: string
   description: string
   createdAt: Date
