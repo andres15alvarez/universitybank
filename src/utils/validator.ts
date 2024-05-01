@@ -44,8 +44,12 @@ export function checkAlpha(event: KeyboardEvent) {
 }
 
 export function isPositiveFloat(value: string): boolean {
-  const pattern2 = /^\d+(\.\d{1,2})?$/
-  return pattern2.test(value)
+  const pattern = /^\d+(\.\d{1,2})?$/
+  return pattern.test(value)
+}
+
+export function removeWhiteSpaces(value: string): string {
+  return value.replace(/ /g, '')
 }
 
 export function isAccountNumberLengthCorrect(value: string): boolean {
