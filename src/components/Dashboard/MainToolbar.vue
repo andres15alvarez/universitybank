@@ -62,7 +62,7 @@ function logout() {
           prepend-icon="mdi-bank-transfer"
           link
           title="Transferencias"
-          to="/transfers"
+          to="/transfer"
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-contacts"
