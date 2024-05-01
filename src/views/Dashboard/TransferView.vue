@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { ContactService } from '@/api/contact'
+import { MovementService } from '@/api/movement'
 import { UserService } from '@/api/user'
 import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Contact } from '@/interfaces/contact'
+import type { CreateMovementRequest } from '@/interfaces/movement'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
-import { isRequired, isNumber, isAccountNumberLengthCorrect } from '@/utils/validator'
+import {
+  isRequired,
+  isNumber,
+  isAccountNumberLengthCorrect,
+  removeWhiteSpaces
+} from '@/utils/validator'
 import { Mask } from 'maska'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const mask = new Mask({
   mask: '9 99#.##',
   tokens: {
@@ -16,14 +25,46 @@ const mask = new Mask({
   reversed: true
 })
 const amount = ref('')
-const registrado = ref(true)
+const isButtonDisabled = ref(true)
+const registered = ref(true)
+const isLoading = ref(false)
 const balance = ref(0)
 const accountNumber = ref('')
 const contacts = ref(new Array<object>())
+const data = ref({
+  amount: 0,
+  accountNumber: '',
+  description: ''
+} as CreateMovementRequest)
 
-function pay() {}
+function clear() {
+  amount.value = ''
+  data.value.accountNumber = ''
+  data.value.description = ''
+}
 
-function clear() {}
+function pay() {
+  isLoading.value = true
+  const client = new MovementService()
+  client
+    .create(data.value)
+    .then((response) => {
+      router.beforeResolve((to) => {
+        to.meta.accountNumber = response.accountNumber
+        to.meta.amount = response.amount
+        to.meta.balance = response.balance
+        to.meta.createdAt = response.createdAt
+        to.meta.description = response.description
+        to.meta.id = response.id
+        to.meta.multiplier = response.multiplier
+        to.meta.updatedAt = response.updatedAt
+      })
+      router.push({ name: 'transferSuccess' })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 
 function getAccountNumber() {
   const client = new UserService()
@@ -66,6 +107,26 @@ function getContacts() {
     })
 }
 
+watch(amount, (newValue, _) => {
+  data.value.amount = parseFloat(removeWhiteSpaces(mask.masked(newValue)))
+})
+
+watch(
+  data,
+  (newData, _) => {
+    if (
+      isRequired(newData.accountNumber) &&
+      isRequired(newData.description) &&
+      data.value.amount <= balance.value
+    ) {
+      isButtonDisabled.value = false
+    } else {
+      isButtonDisabled.value = true
+    }
+  },
+  { deep: true }
+)
+
 onMounted(() => {
   getBalance()
   getAccountNumber()
@@ -103,7 +164,8 @@ onMounted(() => {
           </v-select>
 
           <v-select
-            v-if="registrado"
+            v-if="registered"
+            v-model="data.accountNumber"
             class="mt-5 w-50"
             bg-color="white"
             label="Contactos registrados"
@@ -115,7 +177,8 @@ onMounted(() => {
           </v-select>
 
           <v-text-field
-            v-if="!registrado"
+            v-if="!registered"
+            v-model="data.accountNumber"
             class="mt-5 w-50"
             bg-color="white"
             label="Número de cuenta"
@@ -129,8 +192,8 @@ onMounted(() => {
           <div class="w-50 d-flex justify-start">
             <v-checkbox
               class="mt-n5"
-              @click="registrado = !registrado"
               label="Cuenta no registada"
+              @click="registered = !registered"
             ></v-checkbox>
           </div>
 
@@ -146,6 +209,7 @@ onMounted(() => {
           ></v-text-field>
 
           <v-text-field
+            v-model="data.description"
             class="mt-5 w-50"
             label="Descripción"
             variant="outlined"
@@ -157,11 +221,48 @@ onMounted(() => {
           ></v-text-field>
 
           <div class="mb-5">
-            <v-btn class="me-16 text-none" color="grey" variant="flat" @click="clear"
+            <v-btn class="me-16 text-none" color="primary" variant="flat" @click="clear"
               >Limpiar</v-btn
             >
-            <v-btn class="me-2 text-none" color="#085f63" variant="flat" @click="pay">
+            <v-btn
+              class="me-2 text-none"
+              color="primary"
+              variant="flat"
+              :disabled="isButtonDisabled"
+            >
               Pagar
+              <v-dialog activator="parent">
+                <template v-slot:default="{ isActive }">
+                  <v-card class="text-start mx-auto">
+                    <v-card-title>Confirma los datos para transferir</v-card-title>
+                    <v-card-text
+                      >Número de cuenta: <b>{{ data.accountNumber }}</b></v-card-text
+                    >
+                    <v-card-text
+                      >Monto: <b>{{ mask.masked(amount) }}</b></v-card-text
+                    >
+                    <v-card-text>Descripción: {{ data.description }}</v-card-text>
+                    <template v-slot:actions>
+                      <v-btn
+                        class="text-none"
+                        color="red"
+                        variant="flat"
+                        @click="isActive.value = false"
+                        >Cancelar</v-btn
+                      >
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        class="text-none"
+                        color="primary"
+                        variant="flat"
+                        :loading="isLoading"
+                        @click="pay"
+                        >Pagar</v-btn
+                      >
+                    </template>
+                  </v-card>
+                </template>
+              </v-dialog>
             </v-btn>
           </div>
         </v-card>
