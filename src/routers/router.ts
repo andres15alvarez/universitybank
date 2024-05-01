@@ -9,7 +9,8 @@ import SignUpViewOne from '@/views/SignUp/SignUpViewOne.vue'
 import SignUpViewTwo from '@/views/SignUp/SignUpViewTwo.vue'
 import SignUpViewThree from '@/views/SignUp/SignUpViewThree.vue'
 import UpdatePasswordView from '@/views/Dashboard/UpdatePasswordView.vue'
-import TransfersView from '@/views/Dashboard/TransfersView.vue'
+import TransferView from '@/views/Dashboard/TransferView.vue'
+import TransferConfirmedView from '@/views/Dashboard/TransferConfirmedView.vue'
 import ContactsView from '@/views/Dashboard/ContactsView.vue'
 import ProfileView from '@/views/Dashboard/ProfileView.vue'
 
@@ -38,7 +39,22 @@ const routes = [
       requiredLogin: true
     }
   },
-  { path: '/transfers', name: 'transfers', component: TransfersView },
+  {
+    path: '/transfer',
+    name: 'transfer',
+    component: TransferView,
+    meta: {
+      requiredLogin: true
+    }
+  },
+  {
+    path: '/transfer/success',
+    name: 'transferSuccess',
+    component: TransferConfirmedView,
+    meta: {
+      requiredLogin: true
+    }
+  },
   { path: '/contacts', name: 'contacts', component: ContactsView },
   { path: '/profile', name: 'profile', component: ProfileView }
 ]

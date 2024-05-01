@@ -14,9 +14,9 @@ export class ContactService extends Client {
   }
 
   async list(
-    alias: string | null,
-    page: number | null,
-    pageSize: number | null
+    alias: string | null = null,
+    page: number | null = null,
+    pageSize: number | null = null
   ): Promise<Array<Contact> | any> {
     const response = await this.get({
       url: this.baseURL,

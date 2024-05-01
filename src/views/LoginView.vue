@@ -42,7 +42,7 @@ async function login() {
 
 watch(
   loginData,
-  (newLoginData, oldLoginData) => {
+  (newLoginData, _) => {
     if (
       isRequired(newLoginData.email) &&
       isRequired(newLoginData.password) &&
