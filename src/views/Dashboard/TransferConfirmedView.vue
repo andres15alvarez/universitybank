@@ -23,19 +23,32 @@ const transferData = {
     <h2 class="text-primary">Transferencias a terceros</h2>
     <v-row>
       <v-col>
-        <v-card class="text-center mx-auto">
+        <v-card
+          class="text-center mx-auto"
+          style="
+            background: linear-gradient(
+              180deg,
+              rgb(73 190 183) 50%,
+              rgb(73 190 183) 25%,
+              rgb(223 255 242) 94%
+            );
+          "
+        >
           <v-card-title>Transferencia realizada con éxito</v-card-title>
           <v-card-text
             >Número de cuenta: <b>{{ transferData.accountNumber }}</b></v-card-text
           >
           <v-card-text
-            >Monto: <b>{{ transferData.amount }}</b></v-card-text
+            >Monto: <b>{{ transferData.amount.toFixed(2) }}</b></v-card-text
           >
           <v-card-text
             >Referencia: <b>{{ transferData.id }}</b></v-card-text
           >
           <v-card-text>Descripción: {{ transferData.description }}</v-card-text>
-          <v-btn class="text-none" color="primary" variant="flat" to="/dashboard">Aceptar </v-btn>
+
+          <v-btn class="text-none ma-5" color="primary" variant="flat" to="/dashboard"
+            >Aceptar
+          </v-btn>
         </v-card>
       </v-col>
     </v-row>
