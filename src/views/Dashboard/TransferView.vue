@@ -10,7 +10,8 @@ import {
   isRequired,
   isNumber,
   isAccountNumberLengthCorrect,
-  removeWhiteSpaces
+  removeWhiteSpaces,
+  checkNumber
 } from '@/utils/validator'
 import { Mask } from 'maska'
 import { ref, onMounted, watch } from 'vue'
@@ -28,6 +29,7 @@ const amount = ref('')
 const isButtonDisabled = ref(true)
 const registered = ref(true)
 const isLoading = ref(false)
+const isCheckboxDisabled = ref(false)
 const balance = ref(0)
 const accountNumber = ref('')
 const contacts = ref(new Array<object>())
@@ -36,6 +38,14 @@ const data = ref({
   accountNumber: '',
   description: ''
 } as CreateMovementRequest)
+
+function getBalanceHint() {
+  return 'Saldo disponible: ' + balance.value.toFixed(2).toString()
+}
+
+function getRemainingBalance() {
+  return 'Saldo restante: ' + (balance.value - data.value.amount).toFixed(2).toString()
+}
 
 function clear() {
   amount.value = ''
@@ -95,15 +105,21 @@ function getContacts() {
   client
     .list()
     .then((response: Array<Contact>) => {
-      contacts.value = response.map((contact) => {
-        return {
-          title: `${contact.alias} - ${contact.accountNumber}`,
-          value: contact.accountNumber
-        }
-      })
+      if (response.length == 0) {
+        registered.value = false
+        isCheckboxDisabled.value = true
+      } else {
+        contacts.value = response.map((contact) => {
+          return {
+            title: `${contact.alias} - ${contact.accountNumber}`,
+            value: contact.accountNumber
+          }
+        })
+      }
     })
-    .catch((error) => {
-      console.log(error)
+    .catch(() => {
+      registered.value = false
+      isCheckboxDisabled.value = true
     })
 }
 
@@ -117,6 +133,7 @@ watch(
     if (
       isRequired(newData.accountNumber) &&
       isRequired(newData.description) &&
+      isAccountNumberLengthCorrect(newData.accountNumber) &&
       data.value.amount <= balance.value
     ) {
       isButtonDisabled.value = false
@@ -152,14 +169,16 @@ onMounted(() => {
           "
         >
           <v-select
+            readonly
             persistent-hint
             class="mt-5 w-50"
             bg-color="white"
             label="Cuenta a debitar"
             variant="outlined"
             placeholder="Cuenta a debitar"
+            :model-value="accountNumber"
             :items="[accountNumber]"
-            :hint="'Saldo disponible: ' + balance.toString()"
+            :hint="getBalanceHint()"
           >
           </v-select>
 
@@ -186,6 +205,7 @@ onMounted(() => {
             minlength="20"
             maxlength="20"
             :rules="[isRequired, isNumber, isAccountNumberLengthCorrect]"
+            @keydown="checkNumber"
           >
           </v-text-field>
 
@@ -193,19 +213,24 @@ onMounted(() => {
             <v-checkbox
               class="mt-n5"
               label="Cuenta no registada"
+              :model-value="!registered"
+              :disabled="isCheckboxDisabled"
               @click="registered = !registered"
             ></v-checkbox>
           </div>
 
           <v-text-field
+            persistent-hint
             class="w-50"
             label="Monto"
             variant="outlined"
             placeholder="Ejemplo 140.05"
             bg-color="white"
+            :hint="getRemainingBalance()"
             :rules="[isRequired]"
             :model-value="mask.masked(amount)"
             @update:model-value="(value) => (amount = mask.unmasked(value))"
+            @keydown="checkNumber"
           ></v-text-field>
 
           <v-text-field
