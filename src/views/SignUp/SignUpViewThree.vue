@@ -83,7 +83,10 @@ async function signup() {
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
-      <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__signUp" />
+      <img
+        src="https://universitybank.sirv.com/images/laptop.png"
+        class="imgLaptop__signUp"
+      >
     </div>
 
     <div class="div__form--SignUp">
@@ -91,7 +94,7 @@ async function signup() {
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form--signUp"
-        />
+        >
       </RouterLink>
 
       <h1>Datos de contacto</h1>
@@ -103,7 +106,7 @@ async function signup() {
         variant="outlined"
         maxlength="20"
         :rules="[isRequired, isNumber]"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="accountData.birthDate"
@@ -111,7 +114,7 @@ async function signup() {
         placeholder=""
         variant="outlined"
         type="date"
-      ></v-text-field>
+      />
 
       <div class="text-end">
         <v-btn
@@ -121,7 +124,8 @@ async function signup() {
           :disabled="buttonDisabled"
           :loading="isLoading"
           @click="signup"
-          ><b>Crear cuenta</b>
+        >
+          <b>Crear cuenta</b>
         </v-btn>
       </div>
     </div>

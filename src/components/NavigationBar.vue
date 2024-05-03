@@ -18,13 +18,16 @@ const sections = [
 </script>
 
 <template>
-  <v-toolbar class="d-none d-sm-flex" color="#fff">
+  <v-toolbar
+    class="d-none d-sm-flex"
+    color="#fff"
+  >
     <RouterLink to="/">
       <img
         class="ml-10 ml-md-3 d-none d-md-flex w-75"
         src="https://universitybank.sirv.com/images/logo-no-background.png"
         width="300"
-      />
+      >
     </RouterLink>
 
     <v-container>
@@ -37,8 +40,7 @@ const sections = [
           color="primary"
           :text="section.name"
           :to="section.to"
-        >
-        </v-btn>
+        />
       </v-btn-group>
     </v-container>
 
@@ -50,22 +52,32 @@ const sections = [
       rounded="4"
       text="Acceder"
       to="/login"
-    ></v-btn>
+    />
   </v-toolbar>
 
-  <v-toolbar class="d-xs-flex d-sm-none" color="#fff">
+  <v-toolbar
+    class="d-xs-flex d-sm-none"
+    color="#fff"
+  >
     <v-btn>
-      <v-icon color="primary" size="x-large" icon="mdi-menu"></v-icon>
+      <v-icon
+        color="primary"
+        size="x-large"
+        icon="mdi-menu"
+      />
       <v-menu activator="parent">
         <v-list>
-          <v-list-item v-for="section in sections" :key="section.name">
+          <v-list-item
+            v-for="section in sections"
+            :key="section.name"
+          >
             <v-btn
               class="font-weight-bold text-subtitle-1 mx-8 mx-md-2 mx-sm-auto"
               variant="text"
               color="primary"
               :text="section.name"
               :to="section.to"
-            ></v-btn>
+            />
           </v-list-item>
           <v-list-item>
             <v-btn
@@ -74,7 +86,7 @@ const sections = [
               text="Acceder"
               color="primary"
               to="/login"
-            ></v-btn>
+            />
           </v-list-item>
         </v-list>
       </v-menu>
@@ -86,7 +98,7 @@ const sections = [
           class="w-50"
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           width="75"
-        />
+        >
       </RouterLink>
     </div>
   </v-toolbar>

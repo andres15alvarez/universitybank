@@ -59,7 +59,10 @@ function nextStep() {
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
-      <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__signUp" />
+      <img
+        src="https://universitybank.sirv.com/images/laptop.png"
+        class="imgLaptop__signUp"
+      >
     </div>
 
     <div class="div__form--SignUp">
@@ -67,12 +70,14 @@ function nextStep() {
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form--signUp"
-        />
+        >
       </RouterLink>
 
       <h1>Crear una cuenta</h1>
       <div class="text-center mb-2">
-        <p class="text-subtitle-1 text-red">{{ errorMessage }}</p>
+        <p class="text-subtitle-1 text-red">
+          {{ errorMessage }}
+        </p>
       </div>
       <v-text-field
         v-model="accountData.email"
@@ -80,7 +85,7 @@ function nextStep() {
         placeholder="Ingresa tu correo electrónico"
         variant="outlined"
         :rules="[isRequired, isEmail]"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="accountData.password"
@@ -91,7 +96,7 @@ function nextStep() {
         placeholder="Ingresa tu contraseña"
         variant="outlined"
         @click:append-inner="passwordVisible = !passwordVisible"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="accountData.passwordRepeated"
@@ -102,7 +107,7 @@ function nextStep() {
         placeholder="Repite tu contraseña"
         variant="outlined"
         @click:append-inner="passwordRepeatVisible = !passwordRepeatVisible"
-      ></v-text-field>
+      />
 
       <div class="text-end">
         <v-btn
@@ -117,7 +122,9 @@ function nextStep() {
       </div>
 
       <div class="texto__form">
-        <p class="txt">¿Ya tienes una cuenta?</p>
+        <p class="txt">
+          ¿Ya tienes una cuenta?
+        </p>
         <b class="txt"><RouterLink to="/login">Inicia sesión</RouterLink></b>
       </div>
     </div>

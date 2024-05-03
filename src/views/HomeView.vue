@@ -22,13 +22,13 @@ import FooterBar from '@/components/FooterBar.vue'
         width="316"
         text="¡Únete ahora!"
         to="/signup"
-      ></v-btn>
+      />
     </div>
     <img
       src="https://universitybank.sirv.com/images/home.png"
       class="imagenHome w-50"
       width="600"
-    />
+    >
   </div>
   <FooterBar />
 </template>

@@ -154,20 +154,12 @@ onMounted(() => {
 <template>
   <MainToolbar />
   <v-container>
-    <h2 class="text-primary">Transferencias a terceros</h2>
+    <h2 class="text-primary">
+      Transferencias a terceros
+    </h2>
     <v-row>
       <v-col>
-        <v-card
-          class="rounded-lg d-flex align-center flex-column mt-2"
-          style="
-            background: linear-gradient(
-              180deg,
-              rgb(73 190 183) 50%,
-              rgb(73 190 183) 25%,
-              rgb(223 255 242) 94%
-            );
-          "
-        >
+        <v-card class="rounded-lg d-flex align-center flex-column mt-2 backgroundGradient">
           <v-select
             readonly
             persistent-hint
@@ -179,8 +171,7 @@ onMounted(() => {
             :model-value="accountNumber"
             :items="[accountNumber]"
             :hint="getBalanceHint()"
-          >
-          </v-select>
+          />
 
           <v-select
             v-if="registered"
@@ -192,8 +183,7 @@ onMounted(() => {
             placeholder="Contacto registrado"
             :items="contacts"
             :rules="[isRequired]"
-          >
-          </v-select>
+          />
 
           <v-text-field
             v-if="!registered"
@@ -206,8 +196,7 @@ onMounted(() => {
             maxlength="20"
             :rules="[isRequired, isNumber, isAccountNumberLengthCorrect]"
             @keydown="checkNumber"
-          >
-          </v-text-field>
+          />
 
           <div class="w-50 d-flex justify-start">
             <v-checkbox
@@ -216,7 +205,7 @@ onMounted(() => {
               :model-value="!registered"
               :disabled="isCheckboxDisabled"
               @click="registered = !registered"
-            ></v-checkbox>
+            />
           </div>
 
           <v-text-field
@@ -231,7 +220,7 @@ onMounted(() => {
             :model-value="mask.masked(amount)"
             @update:model-value="(value) => (amount = mask.unmasked(value))"
             @keydown="checkNumber"
-          ></v-text-field>
+          />
 
           <v-text-field
             v-model="data.description"
@@ -243,12 +232,17 @@ onMounted(() => {
             maxlength="100"
             counter
             :rules="[isRequired]"
-          ></v-text-field>
+          />
 
           <div class="mb-5">
-            <v-btn class="me-16 text-none" color="primary" variant="flat" @click="clear"
-              >Limpiar</v-btn
+            <v-btn
+              class="me-16 text-none"
+              color="primary"
+              variant="flat"
+              @click="clear"
             >
+              Limpiar
+            </v-btn>
             <v-btn
               class="me-2 text-none"
               color="primary"
@@ -257,33 +251,35 @@ onMounted(() => {
             >
               Pagar
               <v-dialog activator="parent">
-                <template v-slot:default="{ isActive }">
+                <template #default="{ isActive }">
                   <v-card class="text-start mx-auto">
                     <v-card-title>Confirma los datos para transferir</v-card-title>
-                    <v-card-text
-                      >Número de cuenta: <b>{{ data.accountNumber }}</b></v-card-text
-                    >
-                    <v-card-text
-                      >Monto: <b>{{ mask.masked(amount) }}</b></v-card-text
-                    >
+                    <v-card-text>
+                      Número de cuenta: <b>{{ data.accountNumber }}</b>
+                    </v-card-text>
+                    <v-card-text>
+                      Monto: <b>{{ mask.masked(amount) }}</b>
+                    </v-card-text>
                     <v-card-text>Descripción: {{ data.description }}</v-card-text>
-                    <template v-slot:actions>
+                    <template #actions>
                       <v-btn
                         class="text-none"
                         color="red"
                         variant="flat"
                         @click="isActive.value = false"
-                        >Cancelar</v-btn
                       >
-                      <v-spacer></v-spacer>
+                        Cancelar
+                      </v-btn>
+                      <v-spacer />
                       <v-btn
                         class="text-none"
                         color="primary"
                         variant="flat"
                         :loading="isLoading"
                         @click="pay"
-                        >Pagar</v-btn
                       >
+                        Pagar
+                      </v-btn>
                     </template>
                   </v-card>
                 </template>
@@ -295,3 +291,5 @@ onMounted(() => {
     </v-row>
   </v-container>
 </template>
+
+<style></style>

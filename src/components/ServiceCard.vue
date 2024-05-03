@@ -11,14 +11,23 @@ export default {
 <template>
   <container class="containerService">
     <div>
-      <v-icon :icon="icon" size="60px" color="#085f63"></v-icon>
+      <v-icon
+        :icon="icon"
+        size="60px"
+        color="#085f63"
+      />
     </div>
     <div class="divTextos">
       <h4 class="tituloService">
         {{ title }}
       </h4>
 
-      <v-divider class="border-opacity-100" thickness="2" color="#085f63" length="90"></v-divider>
+      <v-divider
+        class="border-opacity-100"
+        thickness="2"
+        color="#085f63"
+        length="90"
+      />
 
       <p class="mt-8 parrafoService text-black">
         {{ text }}

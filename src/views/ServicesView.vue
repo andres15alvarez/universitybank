@@ -7,7 +7,9 @@ import FooterBar from '@/components/FooterBar.vue'
 <template>
   <NavigationBar />
   <div class="text-center">
-    <p class="font-weight-bold text-h4 text-md-h3 text-primary">Servicios</p>
+    <p class="font-weight-bold text-h4 text-md-h3 text-primary">
+      Servicios
+    </p>
   </div>
 
   <div class="mt-10 mx-5">
@@ -41,9 +43,15 @@ import FooterBar from '@/components/FooterBar.vue'
       </v-col>
     </v-row>
 
-    <v-row no-gutters pa-24>
-      <v-col cols="1" class="d-none d-sm-flex w-45">
-        <div class="pa-2 ma-2"></div>
+    <v-row
+      no-gutters
+      pa-24
+    >
+      <v-col
+        cols="1"
+        class="d-none d-sm-flex w-45"
+      >
+        <div class="pa-2 ma-2" />
       </v-col>
 
       <v-col>
@@ -65,12 +73,18 @@ import FooterBar from '@/components/FooterBar.vue'
         </div>
       </v-col>
 
-      <v-col cols="1" class="d-none d-sm-flex w-45">
-        <div class="pa-2 ma-2"></div>
+      <v-col
+        cols="1"
+        class="d-none d-sm-flex w-45"
+      >
+        <div class="pa-2 ma-2" />
       </v-col>
     </v-row>
 
-    <img src="https://universitybank.sirv.com/images/wave.png" class="onda d-none d-sm-flex w-45" />
+    <img
+      src="https://universitybank.sirv.com/images/wave.png"
+      class="onda d-none d-sm-flex w-45"
+    >
   </div>
   <FooterBar />
 </template>
