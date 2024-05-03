@@ -73,7 +73,7 @@ onMounted(() => {
   <MainToolbar />
   <main :class="{ 'main--dashboard': drawer == true }">
     <v-container>
-      <h2 style="color: #085f63">
+      <h2 class="text-primary">
         Dashboard
       </h2>
       <v-row>

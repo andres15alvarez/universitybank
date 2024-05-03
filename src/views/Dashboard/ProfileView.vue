@@ -36,7 +36,7 @@ onMounted(() => {
 <template>
   <MainToolbar />
   <v-container>
-    <h2 style="color: #085f63">
+    <h2 class="text-primary">
       Perfil
     </h2>
 

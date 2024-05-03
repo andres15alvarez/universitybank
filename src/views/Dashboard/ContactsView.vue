@@ -8,12 +8,12 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
   <v-app>
     <v-container>
       <div class="rounded-2xl flex-col dark:bg-slate-900/70 bg-white flex">
-        <h2 style="color: #085f63">
+        <h2 class="text-primary">
           Contactos
         </h2>
         <v-btn
           class="me-2 text-none"
-          color="#085f63"
+          color="primary"
           variant="flat"
           to="/createContact"
         >

@@ -113,7 +113,7 @@ function nextStep() {
         <v-btn
           class="text-none"
           variant="flat"
-          color="#085F63"
+          color="primary"
           :disabled="buttonDisabled"
           @click="nextStep"
         >

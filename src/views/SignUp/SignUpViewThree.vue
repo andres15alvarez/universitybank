@@ -120,7 +120,7 @@ async function signup() {
         <v-btn
           class="text-none"
           variant="flat"
-          color="#085F63"
+          color="primary"
           :disabled="buttonDisabled"
           :loading="isLoading"
           @click="signup"

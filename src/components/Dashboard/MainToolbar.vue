@@ -14,7 +14,7 @@ function logout() {
 <template>
   <v-toolbar
     app
-    color="#085F63"
+    color="primary"
   >
     <v-app-bar-nav-icon
       color="white"
@@ -60,7 +60,7 @@ function logout() {
     <v-navigation-drawer
       v-model="drawer"
       location="left"
-      color="#085F63"
+      color="primary"
       :width="210"
       :absolute="true"
       :disable-resize-watcher="true"

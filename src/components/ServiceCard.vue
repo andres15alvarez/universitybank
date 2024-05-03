@@ -14,7 +14,7 @@ export default {
       <v-icon
         :icon="icon"
         size="60px"
-        color="#085f63"
+        color="primary"
       />
     </div>
     <div class="divTextos">
@@ -25,7 +25,7 @@ export default {
       <v-divider
         class="border-opacity-100"
         thickness="2"
-        color="#085f63"
+        color="primary"
         length="90"
       />
 
