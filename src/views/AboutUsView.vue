@@ -7,18 +7,13 @@ import FooterBar from '@/components/FooterBar.vue'
 <template>
   <NavigationBar />
   <div class="text-center">
-    <p class="font-weight-bold text-h4 text-md-h3 text-primary">
-      Sobre nosotros
-    </p>
+    <p class="font-weight-bold text-h4 text-md-h3 text-primary">Sobre nosotros</p>
   </div>
   <div class="aboutUsContainer mx-5 mx-md-16">
     <v-container class="my-5">
       <v-row>
         <v-col>
-          <v-sheet
-            class="d-flex justify-center mt-5"
-            color="transparent"
-          >
+          <v-sheet class="d-flex justify-center mt-5" color="transparent">
             <AboutUsCard
               title="Visión"
               content="Queremos ser la mejor opción financiera para estudiantes
@@ -29,10 +24,7 @@ import FooterBar from '@/components/FooterBar.vue'
           </v-sheet>
         </v-col>
         <v-col>
-          <v-sheet
-            class="d-flex justify-center mt-5"
-            color="transparent"
-          >
+          <v-sheet class="d-flex justify-center mt-5" color="transparent">
             <AboutUsCard
               title="Misión"
               content="Somos una institución financiera comprometida con los
@@ -46,16 +38,8 @@ import FooterBar from '@/components/FooterBar.vue'
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-sheet
-            class="d-flex justify-center mt-5"
-            color="transparent"
-          >
-            <v-card
-              class="text-center"
-              variant="tonal"
-              color="transparent"
-              max-width="800"
-            >
+          <v-sheet class="d-flex justify-center mt-5" color="transparent">
+            <v-card class="text-center" variant="tonal" color="transparent" max-width="800">
               <div class="pa-6">
                 <v-card-title class="font-weight-bold my-2 text-white text-h5 text-md-h4">
                   Objetivos
@@ -72,25 +56,25 @@ import FooterBar from '@/components/FooterBar.vue'
                     la gestión de sus recursos financieros, a través de nuestros canales digitales y
                     nuestros puntos de atención presencial.
                   </li>
-                  <br>
+                  <br />
                   <li>
                     Fomentar el uso de nuestras plataformas digitales para hacer transferencias
                     entre estudiantes sin comisión, depósitos y retiros en efectivo, ofreciendo
                     herramientas tecnológicas fáciles y seguras.
                   </li>
-                  <br>
+                  <br />
                   <li>
                     Promover la educación financiera de los estudiantes universitarios, a través de
                     charlas, talleres y capacitaciones sobre temas como el ahorro, la inversión y el
                     uso responsable del crédito.
                   </li>
-                  <br>
+                  <br />
                   <li>
                     Establecer alianzas estratégicas con universidades y empresas para ofrecer
                     beneficios exclusivos a nuestros clientes, tales como descuentos en matrículas,
                     becas, prácticas laborales, entre otros.
                   </li>
-                  <br>
+                  <br />
                   <li>
                     Mantener una cultura de innovación y mejora continua en nuestros procesos,
                     productos y servicios, para estar siempre a la vanguardia de las necesidades de

@@ -28,7 +28,7 @@ import FooterBar from '@/components/FooterBar.vue'
       src="https://universitybank.sirv.com/images/home.png"
       class="imagenHome w-50"
       width="600"
-    >
+    />
   </div>
   <FooterBar />
 </template>

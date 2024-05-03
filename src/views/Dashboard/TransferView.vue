@@ -154,9 +154,7 @@ onMounted(() => {
 <template>
   <MainToolbar />
   <v-container>
-    <h2 class="text-primary">
-      Transferencias a terceros
-    </h2>
+    <h2 class="text-primary">Transferencias a terceros</h2>
     <v-row>
       <v-col>
         <v-card class="rounded-lg d-flex align-center flex-column mt-2 backgroundGradient">
@@ -235,12 +233,7 @@ onMounted(() => {
           />
 
           <div class="mb-5">
-            <v-btn
-              class="me-16 text-none"
-              color="primary"
-              variant="flat"
-              @click="clear"
-            >
+            <v-btn class="me-16 text-none" color="primary" variant="flat" @click="clear">
               Limpiar
             </v-btn>
             <v-btn

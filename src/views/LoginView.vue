@@ -61,10 +61,7 @@ watch(
 <template>
   <div class="containerLogin">
     <div class="div__img d-none d-sm-flex w-45">
-      <img
-        src="https://universitybank.sirv.com/images/laptop.png"
-        class="imgLaptop__login"
-      >
+      <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__login" />
     </div>
 
     <div class="div__form">
@@ -72,12 +69,10 @@ watch(
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form"
-        >
+        />
       </RouterLink>
 
-      <h1 class="font-weigth-bold">
-        Bienvenido
-      </h1>
+      <h1 class="font-weigth-bold">Bienvenido</h1>
 
       <v-form>
         <div class="text-center mb-2">
@@ -117,9 +112,7 @@ watch(
         </v-btn>
       </v-form>
       <div class="text-center">
-        <p class="text-subtitle-1">
-          ¿Todavía no tienes una cuenta?
-        </p>
+        <p class="text-subtitle-1">¿Todavía no tienes una cuenta?</p>
         <b><RouterLink to="/signup">Crear una cuenta</RouterLink></b>
       </div>
     </div>

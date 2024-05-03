@@ -7,9 +7,7 @@ import FooterBar from '@/components/FooterBar.vue'
 <template>
   <NavigationBar />
   <div class="text-center">
-    <p class="font-weight-bold text-h4 text-md-h3 text-primary">
-      Contáctanos
-    </p>
+    <p class="font-weight-bold text-h4 text-md-h3 text-primary">Contáctanos</p>
   </div>
   <v-container>
     <v-row>

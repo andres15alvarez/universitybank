@@ -8,15 +8,8 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
   <v-app>
     <v-container>
       <div class="rounded-2xl flex-col dark:bg-slate-900/70 bg-white flex">
-        <h2 class="text-primary">
-          Contactos
-        </h2>
-        <v-btn
-          class="me-2 text-none"
-          color="primary"
-          variant="flat"
-          to="/createContact"
-        >
+        <h2 class="text-primary">Contactos</h2>
+        <v-btn class="me-2 text-none" color="primary" variant="flat" to="/createContact">
           Agregar
         </v-btn>
 
@@ -31,24 +24,13 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
             />
           </template>
 
-          <v-table
-            class="ma-5"
-            fixed-header
-          >
+          <v-table class="ma-5" fixed-header>
             <thead>
               <tr>
-                <th class="text-left">
-                  Número de cuenta
-                </th>
-                <th class="text-left">
-                  Alias
-                </th>
-                <th class="text-left">
-                  Descripción
-                </th>
-                <th class="text-left">
-                  Acciones
-                </th>
+                <th class="text-left">Número de cuenta</th>
+                <th class="text-left">Alias</th>
+                <th class="text-left">Descripción</th>
+                <th class="text-left">Acciones</th>
               </tr>
             </thead>
 

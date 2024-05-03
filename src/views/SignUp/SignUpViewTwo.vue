@@ -54,10 +54,7 @@ function nextStep() {
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
-      <img
-        src="https://universitybank.sirv.com/images/hands.png"
-        class="imgLaptop__signUp"
-      >
+      <img src="https://universitybank.sirv.com/images/hands.png" class="imgLaptop__signUp" />
     </div>
 
     <div class="div__form--SignUp">
@@ -65,7 +62,7 @@ function nextStep() {
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form--signUp"
-        >
+        />
       </RouterLink>
 
       <h1>Datos personales</h1>

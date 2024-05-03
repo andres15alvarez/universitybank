@@ -59,10 +59,7 @@ function nextStep() {
 <template>
   <div class="containerSignUp">
     <div class="div__img--SignUp d-none d-sm-flex w-45">
-      <img
-        src="https://universitybank.sirv.com/images/laptop.png"
-        class="imgLaptop__signUp"
-      >
+      <img src="https://universitybank.sirv.com/images/laptop.png" class="imgLaptop__signUp" />
     </div>
 
     <div class="div__form--SignUp">
@@ -70,7 +67,7 @@ function nextStep() {
         <img
           src="https://universitybank.sirv.com/images/logo-no-background.png"
           class="imgLogo__form--signUp"
-        >
+        />
       </RouterLink>
 
       <h1>Crear una cuenta</h1>
@@ -122,9 +119,7 @@ function nextStep() {
       </div>
 
       <div class="texto__form">
-        <p class="txt">
-          ¿Ya tienes una cuenta?
-        </p>
+        <p class="txt">¿Ya tienes una cuenta?</p>
         <b class="txt"><RouterLink to="/login">Inicia sesión</RouterLink></b>
       </div>
     </div>

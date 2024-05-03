@@ -20,9 +20,7 @@ const transferData = {
 <template>
   <MainToolbar />
   <v-container>
-    <h2 class="text-primary">
-      Transferencias a terceros
-    </h2>
+    <h2 class="text-primary">Transferencias a terceros</h2>
     <v-row>
       <v-col>
         <v-card class="text-center mx-auto backgroundGradient">
@@ -38,12 +36,7 @@ const transferData = {
           </v-card-text>
           <v-card-text>Descripción: {{ transferData.description }}</v-card-text>
 
-          <v-btn
-            class="text-none ma-5"
-            color="primary"
-            variant="flat"
-            to="/dashboard"
-          >
+          <v-btn class="text-none ma-5" color="primary" variant="flat" to="/dashboard">
             Aceptar
           </v-btn>
         </v-card>

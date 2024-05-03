@@ -62,9 +62,7 @@ function updatePassword() {
 <template>
   <MainToolbar />
   <v-container>
-    <h2 class="text-primary">
-      Actualización de Contraseña
-    </h2>
+    <h2 class="text-primary">Actualización de Contraseña</h2>
     <v-row>
       <v-col>
         <v-card
