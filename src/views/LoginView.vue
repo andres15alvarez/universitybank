@@ -76,7 +76,9 @@ watch(
 
       <v-form>
         <div class="text-center mb-2">
-          <p class="text-subtitle-1 text-red">{{ errorMessage }}</p>
+          <p class="text-subtitle-1 text-red">
+            {{ errorMessage }}
+          </p>
         </div>
         <v-text-field
           v-model="loginData.email"
@@ -84,7 +86,7 @@ watch(
           placeholder="Ingresa tu correo electrónico"
           variant="outlined"
           :rules="[isRequired, isEmail]"
-        ></v-text-field>
+        />
 
         <v-text-field
           v-model="loginData.password"
@@ -95,7 +97,7 @@ watch(
           placeholder="Ingresa tu contraseña"
           variant="outlined"
           @click:append-inner="visible = !visible"
-        ></v-text-field>
+        />
 
         <v-btn
           block

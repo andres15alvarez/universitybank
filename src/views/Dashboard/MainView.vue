@@ -73,28 +73,28 @@ onMounted(() => {
   <MainToolbar />
   <main :class="{ 'main--dashboard': drawer == true }">
     <v-container>
-      <h2 style="color: #085f63">Dashboard</h2>
+      <h2 class="text-primary">Dashboard</h2>
       <v-row>
         <v-col cols="12" md="6">
           <v-card hover class="mx-auto rounded-lg" variant="elevated" title="Bienvenido(a)">
-            <template v-slot:prepend>
+            <template #prepend>
               <v-avatar color="secondary">
-                <v-icon color="#FFFFFF" icon="mdi-account"></v-icon>
+                <v-icon color="#FFFFFF" icon="mdi-account" />
               </v-avatar>
             </template>
-            <template v-slot:append>
+            <template #append>
               <v-card-text>{{ userData.lastName }}, {{ userData.firstName }}</v-card-text>
             </template>
           </v-card>
         </v-col>
         <v-col cols="12" md="6">
           <v-card hover class="rounded-lg" variant="elevated" title="Balance">
-            <template v-slot:prepend>
+            <template #prepend>
               <v-avatar color="secondary">
-                <v-icon color="#FFFFFF" icon="mdi-wallet-bifold"></v-icon>
+                <v-icon color="#FFFFFF" icon="mdi-wallet-bifold" />
               </v-avatar>
             </template>
-            <template v-slot:append>
+            <template #append>
               <v-card-text>{{ balance.toFixed(2) }}</v-card-text>
             </template>
           </v-card>
@@ -103,11 +103,13 @@ onMounted(() => {
       <v-row>
         <v-col>
           <v-card hover class="text-white rounded-lg" variant="elevated" color="secondary">
-            <template v-slot:prepend>
+            <template #prepend>
               <v-card-title>Número de cuenta:</v-card-title>
             </template>
-            <template v-slot:append>
-              <v-card-text class=""> {{ userData.accountNumber }}</v-card-text>
+            <template #append>
+              <v-card-text class="">
+                {{ userData.accountNumber }}
+              </v-card-text>
             </template>
           </v-card>
 
@@ -137,7 +139,7 @@ onMounted(() => {
                 </tr>
               </tbody>
             </v-table>
-            <v-data-table-server :items-length="10"></v-data-table-server>
+            <v-data-table-server :items-length="10" />
           </div>
         </v-col>
       </v-row>

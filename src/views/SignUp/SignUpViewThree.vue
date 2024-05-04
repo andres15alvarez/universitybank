@@ -103,7 +103,7 @@ async function signup() {
         variant="outlined"
         maxlength="20"
         :rules="[isRequired, isNumber]"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="accountData.birthDate"
@@ -111,17 +111,18 @@ async function signup() {
         placeholder=""
         variant="outlined"
         type="date"
-      ></v-text-field>
+      />
 
       <div class="text-end">
         <v-btn
           class="text-none"
           variant="flat"
-          color="#085F63"
+          color="primary"
           :disabled="buttonDisabled"
           :loading="isLoading"
           @click="signup"
-          ><b>Crear cuenta</b>
+        >
+          <b>Crear cuenta</b>
         </v-btn>
       </div>
     </div>

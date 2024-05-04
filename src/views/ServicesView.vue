@@ -43,7 +43,7 @@ import FooterBar from '@/components/FooterBar.vue'
 
     <v-row no-gutters pa-24>
       <v-col cols="1" class="d-none d-sm-flex w-45">
-        <div class="pa-2 ma-2"></div>
+        <div class="pa-2 ma-2" />
       </v-col>
 
       <v-col>
@@ -66,7 +66,7 @@ import FooterBar from '@/components/FooterBar.vue'
       </v-col>
 
       <v-col cols="1" class="d-none d-sm-flex w-45">
-        <div class="pa-2 ma-2"></div>
+        <div class="pa-2 ma-2" />
       </v-col>
     </v-row>
 

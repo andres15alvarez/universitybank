@@ -75,7 +75,7 @@ function nextStep() {
         maxlength="40"
         :rules="[isRequired, isAlpha]"
         @keydown="checkAlpha"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="accountData.lastName"
@@ -85,7 +85,7 @@ function nextStep() {
         maxlength="40"
         :rules="[isRequired, isAlpha]"
         @keydown="checkAlpha"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="accountData.documentNumber"
@@ -95,16 +95,17 @@ function nextStep() {
         maxlength="20"
         :rules="[isRequired, isNumber]"
         @keydown="checkNumber"
-      ></v-text-field>
+      />
 
       <div class="text-end">
         <v-btn
           class="text-none"
           variant="flat"
-          color="#085F63"
+          color="primary"
           :disabled="buttonDisabled"
           @click="nextStep"
-          ><b>Siguiente</b>
+        >
+          <b>Siguiente</b>
         </v-btn>
       </div>
     </div>

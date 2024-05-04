@@ -18,7 +18,7 @@ const icons = [
           class="mx-4"
           variant="text"
           target="_blank"
-        ></v-btn>
+        />
       </div>
       <div>Copyrigth © <strong>Banco Universitario</strong> {{ new Date().getFullYear() }}</div>
     </v-footer>

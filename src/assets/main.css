@@ -22,15 +22,15 @@
   src: url('./fonts/MontserratAlternates-Bold.ttf');
 }
 
+* {
+  font-family: 'Montserrat' !important;
+}
+
 .backgroundGradient {
-  background: linear-gradient(
+  background-image: linear-gradient(
     180deg,
     rgb(73 190 183) 0%,
     rgb(73 190 183) 25%,
     rgb(223 255 242) 94%
-  );
-}
-
-* {
-  font-family: 'Montserrat' !important;
+  ) !important;
 }

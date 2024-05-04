@@ -62,22 +62,16 @@ function updatePassword() {
 <template>
   <MainToolbar />
   <v-container>
-    <h2 style="color: #085f63">Actualización de Contraseña</h2>
+    <h2 class="text-primary">Actualización de Contraseña</h2>
     <v-row>
       <v-col>
         <v-card
-          class="rounded-lg d-flex align-center flex-column mt-2 mb-5"
+          class="backgroundGradient rounded-lg d-flex align-center flex-column mt-2 mb-5"
           variant="elevated"
-          style="
-            background: linear-gradient(
-              180deg,
-              rgb(73 190 183) 50%,
-              rgb(73 190 183) 25%,
-              rgb(223 255 242) 94%
-            );
-          "
         >
-          <p class="text-subtitle-1 text-red mt-5">{{ errorMessage }}</p>
+          <p class="text-subtitle-1 text-red mt-5">
+            {{ errorMessage }}
+          </p>
           <p class="text-subtitle-1 text-black mt-5">
             <b>{{ message }}</b>
           </p>
@@ -91,7 +85,7 @@ function updatePassword() {
             label="Contraseña"
             variant="outlined"
             @click:append-inner="oldPasswordVisible = !oldPasswordVisible"
-          ></v-text-field>
+          />
           <v-text-field
             v-model="updatePasswordData.newPassword"
             class="my-3 w-50"
@@ -102,7 +96,7 @@ function updatePassword() {
             label="Nueva contraseña"
             variant="outlined"
             @click:append-inner="passwordVisible = !passwordVisible"
-          ></v-text-field>
+          />
           <v-text-field
             v-model="updatePasswordData.repeatedNewPassword"
             class="my-5 w-50"
@@ -113,7 +107,7 @@ function updatePassword() {
             label="Repite tu nueva contraseña"
             variant="outlined"
             @click:append-inner="passwordRepeatVisible = !passwordRepeatVisible"
-          ></v-text-field>
+          />
           <v-btn
             class="text-none mb-5"
             variant="flat"
@@ -121,7 +115,8 @@ function updatePassword() {
             :disabled="buttonDisabled"
             :loading="isLoading"
             @click="updatePassword"
-            ><b>Actualizar</b>
+          >
+            <b>Actualizar</b>
           </v-btn>
         </v-card>
       </v-col>

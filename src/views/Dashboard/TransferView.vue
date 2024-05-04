@@ -10,7 +10,8 @@ import {
   isRequired,
   isNumber,
   isAccountNumberLengthCorrect,
-  removeWhiteSpaces
+  removeWhiteSpaces,
+  checkNumber
 } from '@/utils/validator'
 import { Mask } from 'maska'
 import { ref, onMounted, watch } from 'vue'
@@ -28,6 +29,7 @@ const amount = ref('')
 const isButtonDisabled = ref(true)
 const registered = ref(true)
 const isLoading = ref(false)
+const isCheckboxDisabled = ref(false)
 const balance = ref(0)
 const accountNumber = ref('')
 const contacts = ref(new Array<object>())
@@ -36,6 +38,14 @@ const data = ref({
   accountNumber: '',
   description: ''
 } as CreateMovementRequest)
+
+function getBalanceHint() {
+  return 'Saldo disponible: ' + balance.value.toFixed(2).toString()
+}
+
+function getRemainingBalance() {
+  return 'Saldo restante: ' + (balance.value - data.value.amount).toFixed(2).toString()
+}
 
 function clear() {
   amount.value = ''
@@ -95,15 +105,21 @@ function getContacts() {
   client
     .list()
     .then((response: Array<Contact>) => {
-      contacts.value = response.map((contact) => {
-        return {
-          title: `${contact.alias} - ${contact.accountNumber}`,
-          value: contact.accountNumber
-        }
-      })
+      if (response.length == 0) {
+        registered.value = false
+        isCheckboxDisabled.value = true
+      } else {
+        contacts.value = response.map((contact) => {
+          return {
+            title: `${contact.alias} - ${contact.accountNumber}`,
+            value: contact.accountNumber
+          }
+        })
+      }
     })
-    .catch((error) => {
-      console.log(error)
+    .catch(() => {
+      registered.value = false
+      isCheckboxDisabled.value = true
     })
 }
 
@@ -117,6 +133,7 @@ watch(
     if (
       isRequired(newData.accountNumber) &&
       isRequired(newData.description) &&
+      isAccountNumberLengthCorrect(newData.accountNumber) &&
       data.value.amount <= balance.value
     ) {
       isButtonDisabled.value = false
@@ -140,28 +157,19 @@ onMounted(() => {
     <h2 class="text-primary">Transferencias a terceros</h2>
     <v-row>
       <v-col>
-        <v-card
-          class="rounded-lg d-flex align-center flex-column mt-2"
-          style="
-            background: linear-gradient(
-              180deg,
-              rgb(73 190 183) 50%,
-              rgb(73 190 183) 25%,
-              rgb(223 255 242) 94%
-            );
-          "
-        >
+        <v-card class="rounded-lg d-flex align-center flex-column mt-2 backgroundGradient">
           <v-select
+            readonly
             persistent-hint
             class="mt-5 w-50"
             bg-color="white"
             label="Cuenta a debitar"
             variant="outlined"
             placeholder="Cuenta a debitar"
+            :model-value="accountNumber"
             :items="[accountNumber]"
-            :hint="'Saldo disponible: ' + balance.toString()"
-          >
-          </v-select>
+            :hint="getBalanceHint()"
+          />
 
           <v-select
             v-if="registered"
@@ -173,8 +181,7 @@ onMounted(() => {
             placeholder="Contacto registrado"
             :items="contacts"
             :rules="[isRequired]"
-          >
-          </v-select>
+          />
 
           <v-text-field
             v-if="!registered"
@@ -186,27 +193,32 @@ onMounted(() => {
             minlength="20"
             maxlength="20"
             :rules="[isRequired, isNumber, isAccountNumberLengthCorrect]"
-          >
-          </v-text-field>
+            @keydown="checkNumber"
+          />
 
           <div class="w-50 d-flex justify-start">
             <v-checkbox
               class="mt-n5"
               label="Cuenta no registada"
+              :model-value="!registered"
+              :disabled="isCheckboxDisabled"
               @click="registered = !registered"
-            ></v-checkbox>
+            />
           </div>
 
           <v-text-field
+            persistent-hint
             class="w-50"
             label="Monto"
             variant="outlined"
             placeholder="Ejemplo 140.05"
             bg-color="white"
+            :hint="getRemainingBalance()"
             :rules="[isRequired]"
             :model-value="mask.masked(amount)"
             @update:model-value="(value) => (amount = mask.unmasked(value))"
-          ></v-text-field>
+            @keydown="checkNumber"
+          />
 
           <v-text-field
             v-model="data.description"
@@ -218,12 +230,12 @@ onMounted(() => {
             maxlength="100"
             counter
             :rules="[isRequired]"
-          ></v-text-field>
+          />
 
           <div class="mb-5">
-            <v-btn class="me-16 text-none" color="primary" variant="flat" @click="clear"
-              >Limpiar</v-btn
-            >
+            <v-btn class="me-16 text-none" color="primary" variant="flat" @click="clear">
+              Limpiar
+            </v-btn>
             <v-btn
               class="me-2 text-none"
               color="primary"
@@ -232,33 +244,35 @@ onMounted(() => {
             >
               Pagar
               <v-dialog activator="parent">
-                <template v-slot:default="{ isActive }">
+                <template #default="{ isActive }">
                   <v-card class="text-start mx-auto">
                     <v-card-title>Confirma los datos para transferir</v-card-title>
-                    <v-card-text
-                      >Número de cuenta: <b>{{ data.accountNumber }}</b></v-card-text
-                    >
-                    <v-card-text
-                      >Monto: <b>{{ mask.masked(amount) }}</b></v-card-text
-                    >
+                    <v-card-text>
+                      Número de cuenta: <b>{{ data.accountNumber }}</b>
+                    </v-card-text>
+                    <v-card-text>
+                      Monto: <b>{{ mask.masked(amount) }}</b>
+                    </v-card-text>
                     <v-card-text>Descripción: {{ data.description }}</v-card-text>
-                    <template v-slot:actions>
+                    <template #actions>
                       <v-btn
                         class="text-none"
                         color="red"
                         variant="flat"
                         @click="isActive.value = false"
-                        >Cancelar</v-btn
                       >
-                      <v-spacer></v-spacer>
+                        Cancelar
+                      </v-btn>
+                      <v-spacer />
                       <v-btn
                         class="text-none"
                         color="primary"
                         variant="flat"
                         :loading="isLoading"
                         @click="pay"
-                        >Pagar</v-btn
                       >
+                        Pagar
+                      </v-btn>
                     </template>
                   </v-card>
                 </template>
@@ -270,3 +284,5 @@ onMounted(() => {
     </v-row>
   </v-container>
 </template>
+
+<style></style>

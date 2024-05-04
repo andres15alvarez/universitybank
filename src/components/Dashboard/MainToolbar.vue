@@ -12,31 +12,26 @@ function logout() {
 </script>
 
 <template>
-  <v-toolbar app color="#085F63">
-    <v-app-bar-nav-icon @click="drawer = !drawer" color="white"></v-app-bar-nav-icon>
+  <v-toolbar app color="primary">
+    <v-app-bar-nav-icon color="white" @click="drawer = !drawer" />
     <v-toolbar-title>Banco Universitario</v-toolbar-title>
-    <v-spacer></v-spacer>
+    <v-spacer />
     <v-menu location="bottom">
-      <template v-slot:activator="{ props }">
+      <template #activator="{ props }">
         <v-btn icon v-bind="props">
-          <v-icon color="white">mdi-account</v-icon>
+          <v-icon color="white"> mdi-account </v-icon>
         </v-btn>
       </template>
       <v-list>
-        <v-list-item prepend-icon="mdi-account" link title="Perfil" to="/profile"></v-list-item>
+        <v-list-item prepend-icon="mdi-account" link title="Perfil" to="/profile" />
         <v-list-item
           prepend-icon="mdi-lock-reset"
           link
           title="Actualizar contraseña"
           to="/updatepassword"
-        ></v-list-item>
-        <v-divider></v-divider>
-        <v-list-item
-          prepend-icon="mdi-logout"
-          link
-          title="Cerrar sesión"
-          @click="logout"
-        ></v-list-item>
+        />
+        <v-divider />
+        <v-list-item prepend-icon="mdi-logout" link title="Cerrar sesión" @click="logout" />
       </v-list>
     </v-menu>
   </v-toolbar>
@@ -44,7 +39,7 @@ function logout() {
     <v-navigation-drawer
       v-model="drawer"
       location="left"
-      color="#085F63"
+      color="primary"
       :width="210"
       :absolute="true"
       :disable-resize-watcher="true"
@@ -52,24 +47,9 @@ function logout() {
       class="v-navigation-drawer__dashboard"
     >
       <v-list>
-        <v-list-item
-          prepend-icon="mdi-view-dashboard"
-          link
-          title="Dashboard"
-          to="/dashboard"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-bank-transfer"
-          link
-          title="Transferencias"
-          to="/transfer"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-contacts"
-          link
-          title="Contactos"
-          to="/contacts"
-        ></v-list-item>
+        <v-list-item prepend-icon="mdi-view-dashboard" link title="Dashboard" to="/dashboard" />
+        <v-list-item prepend-icon="mdi-bank-transfer" link title="Transferencias" to="/transfer" />
+        <v-list-item prepend-icon="mdi-contacts" link title="Contactos" to="/contacts" />
       </v-list>
     </v-navigation-drawer>
   </v-layout>

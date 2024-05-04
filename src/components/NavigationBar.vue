@@ -37,8 +37,7 @@ const sections = [
           color="primary"
           :text="section.name"
           :to="section.to"
-        >
-        </v-btn>
+        />
       </v-btn-group>
     </v-container>
 
@@ -50,12 +49,12 @@ const sections = [
       rounded="4"
       text="Acceder"
       to="/login"
-    ></v-btn>
+    />
   </v-toolbar>
 
   <v-toolbar class="d-xs-flex d-sm-none" color="#fff">
     <v-btn>
-      <v-icon color="primary" size="x-large" icon="mdi-menu"></v-icon>
+      <v-icon color="primary" size="x-large" icon="mdi-menu" />
       <v-menu activator="parent">
         <v-list>
           <v-list-item v-for="section in sections" :key="section.name">
@@ -65,7 +64,7 @@ const sections = [
               color="primary"
               :text="section.name"
               :to="section.to"
-            ></v-btn>
+            />
           </v-list-item>
           <v-list-item>
             <v-btn
@@ -74,7 +73,7 @@ const sections = [
               text="Acceder"
               color="primary"
               to="/login"
-            ></v-btn>
+            />
           </v-list-item>
         </v-list>
       </v-menu>
