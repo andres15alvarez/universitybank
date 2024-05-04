@@ -131,6 +131,7 @@ watch(
   data,
   (newData, _) => {
     if (
+      isNumber(newData.accountNumber) &&
       isRequired(newData.accountNumber) &&
       isRequired(newData.description) &&
       isAccountNumberLengthCorrect(newData.accountNumber) &&
