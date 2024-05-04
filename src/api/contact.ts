@@ -1,6 +1,7 @@
 import { objectToSnake } from 'ts-case-convert'
 import { Client } from '.'
 import type { Contact, ContactDetail } from '@/interfaces/contact'
+import type { Paginate } from '@/interfaces/paginate'
 
 export class ContactService extends Client {
   baseURL = 'client/contact'
@@ -17,8 +18,8 @@ export class ContactService extends Client {
     alias: string | null = null,
     page: number | null = null,
     pageSize: number | null = null
-  ): Promise<Array<Contact> | any> {
-    const response = await this.get({
+  ): Promise<Paginate<Contact> | any> {
+    const response = await this.paginate({
       url: this.baseURL,
       needAuthorization: true,
       params: objectToSnake({ alias, page, pageSize })
