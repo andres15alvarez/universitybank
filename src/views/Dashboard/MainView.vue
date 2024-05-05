@@ -126,10 +126,10 @@ onMounted(() => {
         <v-col>
           <v-card hover class="text-white rounded-lg" variant="elevated" color="secondary">
             <template #prepend>
-              <v-card-title>Número de cuenta:</v-card-title>
+              <v-card-title class="text-subtitle-1 text-sm-h6"> Número de cuenta: </v-card-title>
             </template>
             <template #append>
-              <v-card-text class="">
+              <v-card-text class="text-caption text-sm-body-2 ml-n2 mr-2">
                 {{ userData.accountNumber }}
               </v-card-text>
             </template>
