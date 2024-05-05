@@ -14,6 +14,7 @@ export interface Response {
   message: string
   data: object | [any]
   errors: [string]
+  paginationTotalCount?: number
 }
 
 export class Client {
@@ -41,25 +42,35 @@ export class Client {
   }
 
   async call(method: string, config: ClientConfig): Promise<Response> {
-    let response = undefined
     this.handleConfig(config)
     try {
-      response = await this.client.request({
+      const response = await this.client.request({
         method: method,
         url: config.url,
         data: config.data,
         params: config.params
       })
+      const data: Response = {
+        ...response.data,
+        paginationTotalCount: response.headers?.['x-pagination-total-count']
+      }
+      return data
     } catch (error: any) {
       throw APIError(error.response.data.message, error.response.status, error.response.data.errors)
     }
-    const data: Response = response.data
-    return data
   }
 
   async get(config: ClientConfig) {
     const data = await this.call('get', config)
     return objectToCamel(data.data)
+  }
+
+  async paginate(config: ClientConfig) {
+    const data = await this.call('get', config)
+    return {
+      data: objectToCamel(data.data),
+      total: data.paginationTotalCount
+    }
   }
 
   async post(config: ClientConfig) {

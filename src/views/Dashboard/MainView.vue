@@ -3,6 +3,7 @@ import { MovementService } from '@/api/movement'
 import { UserService } from '@/api/user'
 import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Movement } from '@/interfaces/movement'
+import type { Paginate } from '@/interfaces/paginate'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -10,14 +11,18 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const currentRoute = router.currentRoute.value
 const drawer = ref(false)
-const movements = ref(new Array<Movement>())
+const balance = ref(0)
+const movements = ref(new Array())
 const userData = ref({
   firstName: currentRoute.meta.firstName,
   lastName: currentRoute.meta.lastName,
   email: currentRoute.meta.email,
   accountNumber: currentRoute.meta.accountNumber
 })
-let balance = ref(0)
+const isTableLoading = ref(false)
+const tablePage = ref(1)
+const tableSize = ref(10)
+const totalMovements = ref(0)
 
 function amountTextColor(multiplier: number): string {
   return multiplier == -1 ? 'text-red' : 'text-black'
@@ -51,21 +56,38 @@ function getBalance() {
 }
 
 function getMovements(page: number, pageSize: number) {
+  isTableLoading.value = true
+  if (page > 100) {
+    page = 100
+  }
+  if (pageSize > 100) {
+    pageSize = 100
+  }
   const client = new MovementService()
   client
     .getMovements(page, pageSize)
-    .then((response: Array<Movement>) => {
-      movements.value = response
+    .then((response: Paginate<Movement>) => {
+      movements.value = response.data.map((mov) => {
+        return {
+          accountNumber: mov.accountNumber,
+          amount: (mov.amount * mov.multiplier).toFixed(2),
+          balance: mov.balance.toFixed(2),
+          createdAt: new Date(mov.createdAt).toLocaleDateString('en-GB'),
+          description: mov.description,
+          id: mov.id
+        }
+      })
+      totalMovements.value = response.total
     })
     .catch((error) => {
       console.log(error)
     })
+    .finally(() => (isTableLoading.value = false))
 }
 
 onMounted(() => {
   getUserData()
   getBalance()
-  getMovements(1, 10)
 })
 </script>
 
@@ -114,32 +136,26 @@ onMounted(() => {
           </v-card>
 
           <div class="rounded-2xl flex-col dark:bg-slate-900/70 bg-white flex">
-            <h2 class="text-primary">Movimientos</h2>
-            <v-table class="ma-5" fixed-header height="200px">
-              <thead>
-                <tr>
-                  <th class="text-left">Referencia</th>
-                  <th class="text-left">Cuenta</th>
-                  <th class="text-left">Descripción</th>
-                  <th class="text-left">Monto</th>
-                  <th class="text-left">Balance</th>
-                  <th class="text-left">Fecha</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="mov in movements" :key="mov.id">
-                  <td>{{ mov.id }}</td>
-                  <td>{{ mov.accountNumber }}</td>
-                  <td>{{ mov.description }}</td>
-                  <td :class="amountTextColor(mov.multiplier)">
-                    {{ (mov.amount * mov.multiplier).toFixed(2) }}
-                  </td>
-                  <td>{{ mov.balance.toFixed(2) }}</td>
-                  <td>{{ new Date(mov.createdAt).toLocaleDateString('en-GB') }}</td>
-                </tr>
-              </tbody>
-            </v-table>
-            <v-data-table-server :items-length="10" />
+            <h2 class="mt-2 text-primary">Movimientos</h2>
+            <v-data-table-server
+              v-model:items-per-page="tableSize"
+              v-model:page="tablePage"
+              fixed-header
+              height="300px"
+              :headers="[
+                { title: 'Referencia', key: 'id', align: 'start' },
+                { title: 'Cuenta', key: 'accountNumber', align: 'start' },
+                { title: 'Descripción', key: 'description', align: 'start' },
+                { title: 'Monto', key: 'amount', align: 'end' },
+                { title: 'Balance', key: 'balance', align: 'end' },
+                { title: 'Fecha', key: 'createdAt', align: 'center' }
+              ]"
+              :items-length="totalMovements"
+              :items="movements"
+              :loading="isTableLoading"
+              :items-per-page-options="[5, 10, 20, 100]"
+              @update:options="getMovements(tablePage, tableSize)"
+            ></v-data-table-server>
           </div>
         </v-col>
       </v-row>
