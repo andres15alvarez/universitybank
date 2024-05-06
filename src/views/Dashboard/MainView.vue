@@ -24,8 +24,8 @@ const tablePage = ref(1)
 const tableSize = ref(10)
 const totalMovements = ref(0)
 
-function amountTextColor(multiplier: number): string {
-  return multiplier == -1 ? 'text-red' : 'text-black'
+function amountTextColor(value: number): string {
+  return value < 0 ? 'red' : 'green'
 }
 
 function getUserData() {
@@ -155,7 +155,13 @@ onMounted(() => {
               :loading="isTableLoading"
               :items-per-page-options="[5, 10, 20, 100]"
               @update:options="getMovements(tablePage, tableSize)"
-            ></v-data-table-server>
+            >
+              <template #[`item.amount`]="{ value }">
+                <v-chip :color="amountTextColor(value)">
+                  {{ value }}
+                </v-chip>
+              </template>
+            </v-data-table-server>
           </div>
         </v-col>
       </v-row>
