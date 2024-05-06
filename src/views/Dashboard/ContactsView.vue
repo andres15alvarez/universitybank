@@ -77,9 +77,6 @@ function compararObjetos(objeto1: Object, objeto2: Object): boolean {
   }
   return false
 }
-function confirmDeleteContact() {
-  contacts.value.splice(index, 1)
-}
 
 onMounted(() => {
   getContacts(0, 10)
@@ -128,15 +125,15 @@ onMounted(() => {
             </thead>
 
             <tbody>
-              <tr v-for="(contact, k) in contacts" :key="k">
-                <td>{{ contact.accountNumber }}</td>
-                <td>{{ contact.alias }}</td>
-                <td>{{ contact.description }}</td>
+              <tr v-for="(contact1, k) in contacts" :key="k">
+                <td>{{ contact1.accountNumber }}</td>
+                <td>{{ contact1.alias }}</td>
+                <td>{{ contact1.description }}</td>
                 <td>
                   <v-icon
                     color="primary"
                     @click="
-                      getIndex(contacts.indexOf(contact))
+                      getIndex(contacts.indexOf(contact1))
                       readContactDialog = !readContactDialog
                     "
                     >mdi-eye</v-icon
@@ -144,7 +141,7 @@ onMounted(() => {
                   <v-icon
                     color="primary"
                     @click="
-                      getIndex(contacts.indexOf(contact))
+                      getIndex(contacts.indexOf(contact1))
                       updateContactDialog = !updateContactDialog
                     "
                     >mdi-pencil</v-icon
@@ -152,7 +149,7 @@ onMounted(() => {
                   <v-icon
                     color="primary"
                     @click="
-                      getIndex(contacts.indexOf(contact))
+                      getIndex(contacts.indexOf(contact1))
                       deleteContactDialog = !deleteContactDialog
                     "
                     >mdi-delete
@@ -409,10 +406,7 @@ onMounted(() => {
               color="primary"
               text="Eliminar"
               variant="tonal"
-              @click="
-                deleteContact()
-                deleteContactDialog = false
-              "
+              @click="deleteContact(), (deleteContactDialog = false)"
             >
             </v-btn>
             <v-for></v-for>
