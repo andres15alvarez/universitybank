@@ -5,6 +5,7 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Movement } from '@/interfaces/movement'
 import type { Paginate } from '@/interfaces/paginate'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
+import { hideAccountNumber } from '@/utils/string'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -24,8 +25,12 @@ const tablePage = ref(1)
 const tableSize = ref(10)
 const totalMovements = ref(0)
 
-function amountTextColor(multiplier: number): string {
-  return multiplier == -1 ? 'text-red' : 'text-black'
+function copyToClipboard(value: string) {
+  navigator.clipboard.writeText(value)
+}
+
+function amountTextColor(value: number): string {
+  return value < 0 ? 'red' : 'green'
 }
 
 function getUserData() {
@@ -69,7 +74,7 @@ function getMovements(page: number, pageSize: number) {
     .then((response: Paginate<Movement>) => {
       movements.value = response.data.map((mov) => {
         return {
-          accountNumber: mov.accountNumber,
+          accountNumber: hideAccountNumber(mov.accountNumber),
           amount: (mov.amount * mov.multiplier).toFixed(2),
           balance: mov.balance.toFixed(2),
           createdAt: new Date(mov.createdAt).toLocaleDateString('en-GB'),
@@ -129,6 +134,13 @@ onMounted(() => {
               <v-card-title class="text-subtitle-1 text-sm-h6"> Número de cuenta: </v-card-title>
             </template>
             <template #append>
+              <v-icon
+                color="black"
+                size="22"
+                @click="copyToClipboard(userData.accountNumber as string)"
+              >
+                mdi-content-copy
+              </v-icon>
               <v-card-text class="text-caption text-sm-body-2 ml-n2 mr-2">
                 {{ userData.accountNumber }}
               </v-card-text>
@@ -155,7 +167,13 @@ onMounted(() => {
               :loading="isTableLoading"
               :items-per-page-options="[5, 10, 20, 100]"
               @update:options="getMovements(tablePage, tableSize)"
-            ></v-data-table-server>
+            >
+              <template #[`item.amount`]="{ value }">
+                <v-chip :color="amountTextColor(value)">
+                  {{ value }}
+                </v-chip>
+              </template>
+            </v-data-table-server>
           </div>
         </v-col>
       </v-row>

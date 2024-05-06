@@ -48,10 +48,6 @@ export function isPositiveFloat(value: string): boolean {
   return pattern.test(value)
 }
 
-export function removeWhiteSpaces(value: string): string {
-  return value.replace(/ /g, '')
-}
-
 export function isAccountNumberLengthCorrect(value: string): boolean {
   return value.length == 20
 }
