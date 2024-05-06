@@ -24,8 +24,19 @@ const tablePage = ref(1)
 const tableSize = ref(10)
 const totalMovements = ref(0)
 
+function copyToClipboard() {
+  const num = userData.value.accountNumber as string
+  navigator.clipboard.writeText(num)
+}
+
+function hideAccountNumber(accountNumber: string): string {
+  const firstFourDigit = accountNumber.slice(0, 4)
+  const lastFourDigit = accountNumber.slice(16, 20)
+  return firstFourDigit + '************' + lastFourDigit
+}
+
 function amountTextColor(multiplier: number): string {
-  return multiplier == -1 ? 'text-red' : 'text-black'
+  return multiplier == -1 ? 'text-red' : 'text-green'
 }
 
 function getUserData() {
@@ -74,7 +85,8 @@ function getMovements(page: number, pageSize: number) {
           balance: mov.balance.toFixed(2),
           createdAt: new Date(mov.createdAt).toLocaleDateString('en-GB'),
           description: mov.description,
-          id: mov.id
+          id: mov.id,
+          multiplier: mov.multiplier
         }
       })
       totalMovements.value = response.total
@@ -132,6 +144,7 @@ onMounted(() => {
               <v-card-text class="text-caption text-sm-body-2 ml-n2 mr-2">
                 {{ userData.accountNumber }}
               </v-card-text>
+              <v-icon color="white" size="22" @click="copyToClipboard()">mdi-content-copy</v-icon>
             </template>
           </v-card>
 
@@ -155,7 +168,17 @@ onMounted(() => {
               :loading="isTableLoading"
               :items-per-page-options="[5, 10, 20, 100]"
               @update:options="getMovements(tablePage, tableSize)"
-            ></v-data-table-server>
+            >
+              <template #[`item.accountNumber`]="{ item }">
+                {{ hideAccountNumber(item.accountNumber) }}
+              </template>
+
+              <template #[`item.amount`]="{ item }">
+                <v-chip rounded="0" :class="amountTextColor(item.multiplier)">
+                  {{ item.amount }}
+                </v-chip>
+              </template>
+            </v-data-table-server>
           </div>
         </v-col>
       </v-row>
