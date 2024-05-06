@@ -55,8 +55,22 @@ const routes = [
       requiredLogin: true
     }
   },
-  { path: '/contacts', name: 'contacts', component: ContactsView },
-  { path: '/profile', name: 'profile', component: ProfileView }
+  {
+    path: '/contacts',
+    name: 'contacts',
+    component: ContactsView,
+    meta: {
+      requiredLogin: true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView,
+    meta: {
+      requiredLogin: true
+    }
+  }
 ]
 
 const router = createRouter({
