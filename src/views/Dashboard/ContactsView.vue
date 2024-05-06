@@ -2,90 +2,119 @@
 import { ContactService } from '@/api/contact'
 import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Contact } from '@/interfaces/contact'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { isRequired, isNumber, isAccountNumberLengthCorrect } from '@/utils/validator'
 import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
 import type { Paginate } from '@/interfaces/paginate'
 
-const contact = reactive({ alias: '', accountNumber: '', description: '' })
-
+let index: number
+const contact = reactive({
+  alias: '',
+  accountNumber: '',
+  description: ''
+})
+const contactToUpdate = ref({
+  id: 0,
+  alias: '',
+  accountNumber: '',
+  description: ''
+})
 const contacts = ref(new Array<Contact>())
-
-const router = useRouter()
+const errorMessage = ref('')
+const createContactDialog = ref(false)
+const updateContactDialog = ref(false)
+const isTableLoading = ref(false)
+const tablePage = ref(1)
+const tableSize = ref(5)
+const totalContacts = ref(0)
+const search = ref('')
 
 function createNewContact() {
   const client = new ContactService()
   client
     .create(contact.alias, contact.accountNumber, contact.description)
-    .then((response) => {
-      router.beforeResolve((to) => {
-        to.meta.alias = response.alias
-        to.meta.accountNumber = response.accountNumber
-        to.meta.description = response.description
-      })
-      router.push({ name: 'contactSuccess' })
+    .then((response: Contact) => {
+      createContactDialog.value = false
+      contacts.value.push(response)
+    })
+    .catch((error) => {
+      errorMessage.value = error.message
+    })
+}
+
+function getContacts(page: number, pageSize: number) {
+  isTableLoading.value = true
+  const client = new ContactService()
+  client
+    .list(search.value, page, pageSize)
+    .then((response: Paginate<Contact>) => {
+      contacts.value = response.data
+      totalContacts.value = response.total
     })
     .catch((error) => {
       console.log(error)
+    })
+    .finally(() => {
+      isTableLoading.value = false
+    })
+}
+
+function updateContact() {
+  const client = new ContactService()
+  client
+    .update(
+      contactToUpdate.value.id,
+      contactToUpdate.value.alias,
+      contactToUpdate.value.description
+    )
+    .then((response: Contact) => {
+      contacts.value[index].alias = response.alias
+      contacts.value[index].description = response.description
+      updateContactDialog.value = false
+    })
+    .catch((error) => {
+      errorMessage.value = error.message
     })
 }
 
 function deleteContact() {
   const client = new ContactService()
   client
-    .deleteByID(index.toString())
-    .then((response) => {
-      contacts.value.splice(response.id, 1)
+    .deleteByID(contactToUpdate.value.id)
+    .then(() => {
+      contacts.value.splice(index, 1)
+      updateContactDialog.value = false
     })
     .catch((error) => {
-      console.log(error)
+      errorMessage.value = error.message
     })
 }
 
-function getContacts(page: number, pageSize: number) {
-  const client = new ContactService()
-  client
-    .list(null, page, pageSize)
-    .then((response: Paginate<Contact>) => {
-      contacts.value = response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+function clean() {
+  errorMessage.value = ''
+  contact.alias = ''
+  contact.accountNumber = ''
+  contact.description = ''
 }
 
-// Para poder abrir y cerrar los v-dialog
-const createContactDialog = ref(false)
-const readContactDialog = ref(false)
-const updateContactDialog = ref(false)
-const deleteContactDialog = ref(false)
-
-// Succesful test
-
-let index: number
-
-// Elimina el contacto...
-// Succesful test
-
-function getIndex(id: number) {
-  index = contacts.value.findIndex((item) => compararObjetos(item, contacts.value[id]))
-}
-function compararObjetos(objeto1: Object, objeto2: Object): boolean {
-  if (objeto1 == objeto2) {
-    return true
-  }
-  return false
+function displayCreateDialog() {
+  clean()
+  createContactDialog.value = true
 }
 
-onMounted(() => {
-  getContacts(0, 10)
-})
+function displayUpdateDialog(id: number) {
+  clean()
+  index = id
+  updateContactDialog.value = true
+  contactToUpdate.value.id = contacts.value[id].id
+  contactToUpdate.value.alias = contacts.value[id].alias
+  contactToUpdate.value.accountNumber = contacts.value[id].accountNumber
+  contactToUpdate.value.description = contacts.value[id].description
+}
 </script>
 
 <template>
   <MainToolbar />
-
   <v-app>
     <v-container>
       <div class="rounded-2xl flex-col dark:bg-slate-900/70 bg-white flex">
@@ -97,7 +126,7 @@ onMounted(() => {
               color="primary"
               text="Agregar"
               prepend-icon="mdi-plus"
-              @click="createContactDialog = true"
+              @click="displayCreateDialog"
             >
             </v-btn>
           </v-row>
@@ -106,21 +135,31 @@ onMounted(() => {
         <v-card flat>
           <template #text>
             <v-text-field
+              v-model="search"
+              hide-details
+              single-line
               label="Buscar"
               append-inner-icon="mdi-magnify"
               variant="outlined"
-              hide-details
-              single-line
             ></v-text-field>
           </template>
 
-          <v-table class="ma-5" fixed-header height="300px">
+          <v-data-table-server
+            v-model:items-per-page="tableSize"
+            v-model:page="tablePage"
+            :items-length="totalContacts"
+            :items-per-page-options="[5, 10, 20, 100]"
+            :loading="isTableLoading"
+            :search="search"
+            class="ma-5"
+            @update:options="getContacts(tablePage, tableSize)"
+          >
             <thead>
               <tr>
                 <th class="text-left">Número de cuenta</th>
                 <th class="text-left">Alias</th>
                 <th class="text-left">Descripción</th>
-                <th class="text-left">Acciones</th>
+                <th class="text-left">Editar</th>
               </tr>
             </thead>
 
@@ -130,45 +169,26 @@ onMounted(() => {
                 <td>{{ contact1.alias }}</td>
                 <td>{{ contact1.description }}</td>
                 <td>
-                  <v-icon
-                    color="primary"
-                    @click="
-                      getIndex(contacts.indexOf(contact1)), (readContactDialog = !readContactDialog)
-                    "
-                    >mdi-eye</v-icon
-                  >
-                  <v-icon
-                    color="primary"
-                    @click="
-                      getIndex(contacts.indexOf(contact1)),
-                        (updateContactDialog = !updateContactDialog)
-                    "
-                    >mdi-pencil</v-icon
-                  >
-                  <v-icon
-                    color="primary"
-                    @click="
-                      getIndex(contacts.indexOf(contact1)),
-                        (deleteContactDialog = !deleteContactDialog)
-                    "
-                    >mdi-delete
+                  <v-icon color="primary" @click="displayUpdateDialog(contacts.indexOf(contact1))">
+                    mdi-pencil
                   </v-icon>
                 </td>
               </tr>
             </tbody>
-          </v-table>
-
-          <v-data-table-server :items-length="10"></v-data-table-server>
+          </v-data-table-server>
         </v-card>
       </div>
 
-      <!-- v-dialog para crear un contacto -->
-
       <v-dialog v-model="createContactDialog" max-width="500" transition="dialog-bottom-transition">
         <v-card>
-          <v-card-title class="d-flex justify-center pa-3 text-primary"
-            >Crear contacto</v-card-title
-          >
+          <v-card-title class="d-flex justify-center pa-3 text-primary">
+            Crear contacto
+          </v-card-title>
+          <div class="text-center mb-2">
+            <p class="text-subtitle-1 text-red">
+              {{ errorMessage }}
+            </p>
+          </div>
           <v-card-text>
             <v-col>
               <v-row>
@@ -216,86 +236,30 @@ onMounted(() => {
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text="Cancelar" variant="tonal" @click="createContactDialog = false"> </v-btn>
+            <v-btn text="Cancelar" variant="flat" @click="createContactDialog = false"></v-btn>
 
-            <v-btn
-              color="primary"
-              text="Guardar"
-              variant="tonal"
-              @click="createNewContact(), (createContactDialog = false)"
-            >
-            </v-btn>
+            <v-btn color="primary" text="Guardar" variant="flat" @click="createNewContact"> </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-
-      <!-- v-dialog para ver la info del contacto seleccionado -->
-
-      <v-dialog v-model="readContactDialog" max-width="500" transition="dialog-top-transition">
-        <v-card>
-          <v-card-title class="d-flex justify-center pa-3 text-primary">
-            Detalles contacto</v-card-title
-          >
-          <v-card-text>
-            <v-col>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Alias"
-                    variant="outlined"
-                    :model-value="contacts[index].alias"
-                    readonly
-                  >
-                  </v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Número de cuenta"
-                    variant="outlined"
-                    :model-value="contacts[index].accountNumber"
-                    readonly
-                  >
-                  </v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Descripción"
-                    variant="outlined"
-                    :model-value="contacts[index].description"
-                    readonly
-                  >
-                  </v-text-field>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" text="Cerrar" variant="tonal" @click="readContactDialog = false">
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <!-- v-dialog para actualizar la info del contacto seleccionado -->
 
       <v-dialog v-model="updateContactDialog" max-width="500" transition="dialog-bottom-transition">
         <v-card>
-          <v-card-title class="d-flex justify-center pa-3 text-primary"
-            >Actualizar contacto</v-card-title
-          >
+          <div class="text-center mb-2">
+            <p class="text-subtitle-1 text-red">
+              {{ errorMessage }}
+            </p>
+          </div>
+          <v-card-title class="d-flex justify-center pa-3 text-primary">
+            Actualizar contacto
+          </v-card-title>
           <v-card-text>
             <v-col>
               <v-row>
                 <v-col cols="12">
                   <v-text-field
+                    v-model="contactToUpdate.alias"
                     label="Alias"
-                    :model-value="contacts[index].alias"
                     variant="outlined"
                     :rules="[isRequired]"
                     maxlength="20"
@@ -307,14 +271,11 @@ onMounted(() => {
               <v-row>
                 <v-col cols="12">
                   <v-text-field
+                    v-model="contactToUpdate.accountNumber"
                     label="Número de cuenta"
-                    :model-value="contacts[index].accountNumber"
                     variant="outlined"
-                    :rules="[isRequired, isNumber, isAccountNumberLengthCorrect]"
-                    minlength="20"
-                    maxlength="20"
-                    counter
                     readonly
+                    disabled
                   >
                   </v-text-field>
                 </v-col>
@@ -322,10 +283,10 @@ onMounted(() => {
               <v-row>
                 <v-col cols="12">
                   <v-text-field
+                    v-model="contactToUpdate.description"
                     label="Descripción"
                     variant="outlined"
                     :rules="[isRequired]"
-                    :model-value="contacts[index].description"
                     maxlength="100"
                     counter
                   >
@@ -337,75 +298,9 @@ onMounted(() => {
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text="Cancelar" variant="tonal" @click="updateContactDialog = false"> </v-btn>
-
-            <v-btn
-              color="primary"
-              text="Actualizar"
-              variant="tonal"
-              @click="updateContactDialog = false"
-            >
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <!-- v-dialog para eliminar el contacto seleccionado -->
-
-      <v-dialog v-model="deleteContactDialog" max-width="500">
-        <v-card>
-          <v-card-title class="d-flex justify-center pa-3 text-primary"
-            >Eliminar contacto</v-card-title
-          >
-          <v-card-text>
-            <v-col>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Alias"
-                    variant="outlined"
-                    :model-value="contacts[index].alias"
-                    readonly
-                  >
-                  </v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Número de cuenta"
-                    variant="outlined"
-                    :model-value="contacts[index].accountNumber"
-                    readonly
-                  >
-                  </v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Descripción"
-                    variant="outlined"
-                    :model-value="contacts[index].description"
-                    readonly
-                  >
-                  </v-text-field>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text="Cancelar" variant="tonal" @click="deleteContactDialog = false"> </v-btn>
-            <v-btn
-              color="primary"
-              text="Eliminar"
-              variant="tonal"
-              @click="deleteContact(), (deleteContactDialog = false)"
-            >
-            </v-btn>
-            <v-for></v-for>
+            <v-btn text="Cancelar" variant="flat" @click="updateContactDialog = false"> </v-btn>
+            <v-btn color="red" text="Eliminar" variant="flat" @click="deleteContact"> </v-btn>
+            <v-btn color="primary" text="Actualizar" variant="flat" @click="updateContact"> </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
