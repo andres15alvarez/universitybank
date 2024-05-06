@@ -5,7 +5,7 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Movement } from '@/interfaces/movement'
 import type { Paginate } from '@/interfaces/paginate'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
-import { hideAccountNumber } from '@/utils/string.ts'
+import { hideAccountNumber } from '@/utils/string'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
