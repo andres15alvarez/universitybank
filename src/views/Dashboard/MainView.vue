@@ -5,6 +5,7 @@ import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Movement } from '@/interfaces/movement'
 import type { Paginate } from '@/interfaces/paginate'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
+import { hideAccountNumber } from '@/utils/string.ts'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -73,7 +74,7 @@ function getMovements(page: number, pageSize: number) {
     .then((response: Paginate<Movement>) => {
       movements.value = response.data.map((mov) => {
         return {
-          accountNumber: mov.accountNumber,
+          accountNumber: hideAccountNumber(mov.accountNumber),
           amount: (mov.amount * mov.multiplier).toFixed(2),
           balance: mov.balance.toFixed(2),
           createdAt: new Date(mov.createdAt).toLocaleDateString('en-GB'),

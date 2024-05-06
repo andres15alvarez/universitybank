@@ -6,6 +6,7 @@ import { ref } from 'vue'
 import { isRequired, isNumber, isAccountNumberLengthCorrect } from '@/utils/validator'
 import { reactive } from 'vue'
 import type { Paginate } from '@/interfaces/paginate'
+import { hideAccountNumber } from '@/utils/string'
 
 let index: number
 const contact = reactive({
@@ -147,11 +148,11 @@ function displayUpdateDialog(id: number) {
           <v-data-table-server
             v-model:items-per-page="tableSize"
             v-model:page="tablePage"
+            class="ma-5"
             :items-length="totalContacts"
             :items-per-page-options="[5, 10, 20, 100]"
             :loading="isTableLoading"
             :search="search"
-            class="ma-5"
             @update:options="getContacts(tablePage, tableSize)"
           >
             <thead>
@@ -165,7 +166,7 @@ function displayUpdateDialog(id: number) {
 
             <tbody>
               <tr v-for="(contact1, k) in contacts" :key="k">
-                <td>{{ contact1.accountNumber }}</td>
+                <td>{{ hideAccountNumber(contact1.accountNumber) }}</td>
                 <td>{{ contact1.alias }}</td>
                 <td>{{ contact1.description }}</td>
                 <td>

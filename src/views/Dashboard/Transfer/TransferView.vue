@@ -7,13 +7,8 @@ import type { Contact } from '@/interfaces/contact'
 import type { CreateMovementRequest } from '@/interfaces/movement'
 import type { Paginate } from '@/interfaces/paginate'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
-import {
-  isRequired,
-  isNumber,
-  isAccountNumberLengthCorrect,
-  removeWhiteSpaces,
-  checkNumber
-} from '@/utils/validator'
+import { isRequired, isNumber, isAccountNumberLengthCorrect, checkNumber } from '@/utils/validator'
+import { removeWhiteSpaces } from '@/utils/string'
 import { Mask } from 'maska'
 import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
