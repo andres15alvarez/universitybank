@@ -5,6 +5,7 @@ import { UserService } from '@/api/user'
 import MainToolbar from '@/components/Dashboard/MainToolbar.vue'
 import type { Contact } from '@/interfaces/contact'
 import type { CreateMovementRequest } from '@/interfaces/movement'
+import type { Paginate } from '@/interfaces/paginate'
 import type { BalanceResponse, UserResponse } from '@/interfaces/user'
 import {
   isRequired,
@@ -25,11 +26,14 @@ const mask = new Mask({
   },
   reversed: true
 })
+const errorMessage = ref('')
 const amount = ref('')
+const isActive = ref(false)
 const isButtonDisabled = ref(true)
 const registered = ref(true)
 const isLoading = ref(false)
 const isCheckboxDisabled = ref(false)
+const isUnregisteredContact = ref(false)
 const balance = ref(0)
 const accountNumber = ref('')
 const contacts = ref(new Array<object>())
@@ -45,6 +49,11 @@ function getBalanceHint() {
 
 function getRemainingBalance() {
   return 'Saldo restante: ' + (balance.value - data.value.amount).toFixed(2).toString()
+}
+
+function enableTransferUnregisteredContact() {
+  isUnregisteredContact.value = !isUnregisteredContact.value
+  registered.value = !registered.value
 }
 
 function clear() {
@@ -68,11 +77,16 @@ function pay() {
         to.meta.id = response.id
         to.meta.multiplier = response.multiplier
         to.meta.updatedAt = response.updatedAt
+        to.meta.isUnregisteredContact = isUnregisteredContact.value
       })
       router.push({ name: 'transferSuccess' })
     })
     .catch((error) => {
-      console.log(error)
+      errorMessage.value = error.message
+    })
+    .finally(() => {
+      isLoading.value = false
+      isActive.value = false
     })
 }
 
@@ -104,12 +118,12 @@ function getContacts() {
   const client = new ContactService()
   client
     .list()
-    .then((response: Array<Contact>) => {
-      if (response.length == 0) {
+    .then((response: Paginate<Contact>) => {
+      if (response.data.length == 0) {
         registered.value = false
         isCheckboxDisabled.value = true
       } else {
-        contacts.value = response.map((contact) => {
+        contacts.value = response.data.map((contact) => {
           return {
             title: `${contact.alias} - ${contact.accountNumber}`,
             value: contact.accountNumber
@@ -203,7 +217,7 @@ onMounted(() => {
               label="Cuenta no registada"
               :model-value="!registered"
               :disabled="isCheckboxDisabled"
-              @click="registered = !registered"
+              @click="enableTransferUnregisteredContact"
             />
           </div>
 
@@ -234,6 +248,11 @@ onMounted(() => {
           />
 
           <div class="mb-5">
+            <div class="text-center mb-2">
+              <p class="text-subtitle-1 text-red">
+                {{ errorMessage }}
+              </p>
+            </div>
             <v-btn class="me-16 text-none" color="primary" variant="flat" @click="clear">
               Limpiar
             </v-btn>
@@ -244,39 +263,32 @@ onMounted(() => {
               :disabled="isButtonDisabled"
             >
               Pagar
-              <v-dialog activator="parent">
-                <template #default="{ isActive }">
-                  <v-card class="text-start mx-auto">
-                    <v-card-title>Confirma los datos para transferir</v-card-title>
-                    <v-card-text>
-                      Número de cuenta: <b>{{ data.accountNumber }}</b>
-                    </v-card-text>
-                    <v-card-text>
-                      Monto: <b>{{ mask.masked(amount) }}</b>
-                    </v-card-text>
-                    <v-card-text>Descripción: {{ data.description }}</v-card-text>
-                    <template #actions>
-                      <v-btn
-                        class="text-none"
-                        color="red"
-                        variant="flat"
-                        @click="isActive.value = false"
-                      >
-                        Cancelar
-                      </v-btn>
-                      <v-spacer />
-                      <v-btn
-                        class="text-none"
-                        color="primary"
-                        variant="flat"
-                        :loading="isLoading"
-                        @click="pay"
-                      >
-                        Pagar
-                      </v-btn>
-                    </template>
-                  </v-card>
-                </template>
+              <v-dialog v-model="isActive" activator="parent">
+                <v-card class="text-start mx-auto">
+                  <v-card-title>Confirma los datos para transferir</v-card-title>
+                  <v-card-text>
+                    Número de cuenta: <b>{{ data.accountNumber }}</b>
+                  </v-card-text>
+                  <v-card-text>
+                    Monto: <b>{{ mask.masked(amount) }}</b>
+                  </v-card-text>
+                  <v-card-text>Descripción: {{ data.description }}</v-card-text>
+                  <template #actions>
+                    <v-btn class="text-none" color="red" variant="flat" @click="isActive = false">
+                      Cancelar
+                    </v-btn>
+                    <v-spacer />
+                    <v-btn
+                      class="text-none"
+                      color="primary"
+                      variant="flat"
+                      :loading="isLoading"
+                      @click="pay"
+                    >
+                      Pagar
+                    </v-btn>
+                  </template>
+                </v-card>
               </v-dialog>
             </v-btn>
           </div>
