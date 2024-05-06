@@ -133,24 +133,23 @@ onMounted(() => {
                   <v-icon
                     color="primary"
                     @click="
-                      getIndex(contacts.indexOf(contact1))
-                      readContactDialog = !readContactDialog
+                      getIndex(contacts.indexOf(contact1)), (readContactDialog = !readContactDialog)
                     "
                     >mdi-eye</v-icon
                   >
                   <v-icon
                     color="primary"
                     @click="
-                      getIndex(contacts.indexOf(contact1))
-                      updateContactDialog = !updateContactDialog
+                      getIndex(contacts.indexOf(contact1)),
+                        (updateContactDialog = !updateContactDialog)
                     "
                     >mdi-pencil</v-icon
                   >
                   <v-icon
                     color="primary"
                     @click="
-                      getIndex(contacts.indexOf(contact1))
-                      deleteContactDialog = !deleteContactDialog
+                      getIndex(contacts.indexOf(contact1)),
+                        (deleteContactDialog = !deleteContactDialog)
                     "
                     >mdi-delete
                   </v-icon>
@@ -223,10 +222,7 @@ onMounted(() => {
               color="primary"
               text="Guardar"
               variant="tonal"
-              @click="
-                createNewContact()
-                createContactDialog = false
-              "
+              @click="createNewContact(), (createContactDialog = false)"
             >
             </v-btn>
           </v-card-actions>
