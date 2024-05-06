@@ -27,30 +27,30 @@ export class ContactService extends Client {
     return response
   }
 
-  async getByID(id: string): Promise<ContactDetail | any> {
+  async getByID(id: number): Promise<ContactDetail | any> {
     const response = await this.get({
-      url: this.baseURL + id,
+      url: this.baseURL + `/${id}`,
       needAuthorization: true
     })
     return response
   }
 
   async update(
-    id: string,
+    id: number,
     alias: string | null,
     description: string | null
   ): Promise<Contact | any> {
     const response = await this.patch({
-      url: this.baseURL + id,
+      url: this.baseURL + `/${id}`,
       needAuthorization: true,
       data: objectToSnake({ alias, description })
     })
     return response
   }
 
-  async deleteByID(id: string): Promise<Contact | any> {
+  async deleteByID(id: number): Promise<Contact | any> {
     const response = await this.delete({
-      url: this.baseURL + id,
+      url: this.baseURL + `/${id}`,
       needAuthorization: true
     })
     return response
