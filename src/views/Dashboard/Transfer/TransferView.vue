@@ -117,6 +117,7 @@ function getContacts() {
       if (response.data.length == 0) {
         registered.value = false
         isCheckboxDisabled.value = true
+        isUnregisteredContact.value = true
       } else {
         contacts.value = response.data.map((contact) => {
           return {
