@@ -24,6 +24,10 @@ const tablePage = ref(1)
 const tableSize = ref(10)
 const totalMovements = ref(0)
 
+function copyToClipboard(value: string) {
+  navigator.clipboard.writeText(value)
+}
+
 function amountTextColor(value: number): string {
   return value < 0 ? 'red' : 'green'
 }
@@ -129,6 +133,13 @@ onMounted(() => {
               <v-card-title class="text-subtitle-1 text-sm-h6"> Número de cuenta: </v-card-title>
             </template>
             <template #append>
+              <v-icon
+                color="black"
+                size="22"
+                @click="copyToClipboard(userData.accountNumber as string)"
+              >
+                mdi-content-copy
+              </v-icon>
               <v-card-text class="text-caption text-sm-body-2 ml-n2 mr-2">
                 {{ userData.accountNumber }}
               </v-card-text>
