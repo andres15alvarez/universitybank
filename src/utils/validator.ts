@@ -1,4 +1,4 @@
-const letterPattern = /^[a-zA-Z\s]+$/
+const letterPattern = /^[a-zA-ZÁ-ú\s]+$/
 const numberPattern = /^\d+$/
 
 export function isEmail(value: string): boolean {
